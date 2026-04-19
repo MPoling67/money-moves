@@ -491,33 +491,35 @@ export default function App() {
 
         {/* ── INPUT ZONE ── */}
         <div className="kot-input-zone no-print">
-          <div className="kot-input-row">
-            <input
-              type="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !loading && handleGenerate()}
-              placeholder="Enter your business URL"
-              className="kot-input-field"
-            />
-            <button className="btn-primary" onClick={handleGenerate} disabled={loading || !url.trim()}>
-              {loading ? "Analyzing..." : "Get My Score →"}
-            </button>
-          </div>
-          {loading && <div style={{ marginTop: 18 }}><PulseLoader text={progress} /></div>}
-          {error && (
-            <div style={{ marginTop: 16 }}>
-              <p style={{ color: "#c0705a", fontSize: 13, fontFamily: "'Plus Jakarta Sans',sans-serif", marginBottom: 8 }}>{error}</p>
-              {debugInfo && (
-                <>
-                  <button className="btn-ghost" onClick={() => setDebugOpen(o => !o)} style={{ fontSize: 12, padding: "5px 12px" }}>
-                    {debugOpen ? "Hide" : "Show"} debug info
-                  </button>
-                  {debugOpen && <pre className="kot-debug-pre">{debugInfo}</pre>}
-                </>
-              )}
+          <div style={{ background: "#111110", border: "1.5px solid rgba(134,20,66,0.5)", borderRadius: 10, padding: "1.25rem clamp(16px,4vw,1.5rem)" }}>
+            <div className="kot-input-row">
+              <input
+                type="url"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !loading && handleGenerate()}
+                placeholder="Enter your business URL"
+                className="kot-input-field"
+              />
+              <button className="btn-primary" onClick={handleGenerate} disabled={loading || !url.trim()}>
+                {loading ? "Analyzing..." : "Get My Score →"}
+              </button>
             </div>
-          )}
+            {loading && <div style={{ marginTop: 14 }}><PulseLoader text={progress} /></div>}
+            {error && (
+              <div style={{ marginTop: 14 }}>
+                <p style={{ color: "#c0705a", fontSize: 13, fontFamily: "'Plus Jakarta Sans',sans-serif", marginBottom: 8 }}>{error}</p>
+                {debugInfo && (
+                  <>
+                    <button className="btn-ghost" onClick={() => setDebugOpen(o => !o)} style={{ fontSize: 12, padding: "5px 12px" }}>
+                      {debugOpen ? "Hide" : "Show"} debug info
+                    </button>
+                    {debugOpen && <pre className="kot-debug-pre">{debugInfo}</pre>}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* ── REPORT ── */}
@@ -585,11 +587,12 @@ export default function App() {
             {!emailSubmitted ? (
               <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
                 <p className="card-label">Money Moves</p>
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 16 }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", margin: "0 0 8px" }}>Subscribe to Unlock Your Money Moves</p>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", marginBottom: 16 }}>
                   Drop your name and email to get more intel:
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-                  {["Your Sleeping Giant (overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
+                  {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
@@ -611,7 +614,7 @@ export default function App() {
                 <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", marginBottom: 12 }}>
                   <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
                     style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer" }} />
-                  Yes, subscribe me to Let's Make Some Noise
+                  I understand
                 </label>
                 <button className="btn-primary" onClick={handleEmailSubmit}
                   disabled={emailSubmitting || !email.trim() || !firstName.trim()}
@@ -619,7 +622,7 @@ export default function App() {
                   {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
                 </button>
                 <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, color: "#5a5a56", lineHeight: 1.6 }}>
-                  You'll be subscribed to the Let's Make Some Noise newsletter. You can unsubscribe any time.
+                  By requesting this intel, I'll be subscribed to Let's Make Some Noise. I can unsubscribe any time.
                 </p>
               </div>
             ) : (
@@ -743,11 +746,11 @@ export default function App() {
 
 
             {/* Print */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Print This Page</h3>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Page</h3>
             <div className="card kot-anim no-print" style={{ marginTop: 0 }}>
-              <p className="card-label">Print This Page</p>
+              <p className="card-label">Print / Save This Page</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
-                Your report lives right here. Not in a database.<br />Print this page before you click away, or you'll lose your results.
+                Save or print this page before you click away, or you'll lose your results.
               </p>
               <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
               {isMonica && report && (
