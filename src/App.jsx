@@ -477,7 +477,7 @@ export default function App() {
             </div>
             <div className="kot-hero-sub" style={{ lineHeight: 1.4 }}>
               <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website working as hard as you do?</p>
-              <p>Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the money moves you might be overlooking.</p>
+              <p>Most business websites describe what you do. The best ones make people reach for their wallet. The POWER Score is a free AI-generated competitive analysis across five categories, plus bonus missed opportunities and money moves. Learn exactly where your site is leaving money on the table — and what to do about it.</p>
             </div>
           </div>
           <div className="kot-hero-right">
