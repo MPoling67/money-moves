@@ -363,12 +363,12 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .kot-section-header { background: #1a1a18; padding: 1.75rem clamp(16px,4vw,2rem) 0.75rem; }
+        .kot-section-header { background: #1a1a18; padding: 1.75rem clamp(16px,4vw,2rem) 0; }
         .kot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
         .kot-section-header h2 .power-word { font-weight: 600; color: #f0ede8; }
         .kot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
 
-        .kot-input-zone { background: #1a1a18; padding: 1rem clamp(16px,4vw,2rem) 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .kot-input-zone { background: #1a1a18; padding: 1rem clamp(16px,4vw,2rem); border-bottom: 1px solid rgba(255,255,255,0.06); }
         .kot-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .kot-input-field { flex: 1; min-width: 200px; padding: 10px 14px; background: #111110; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8; -webkit-text-fill-color: #f0ede8; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
         .kot-input-field:focus { border-color: #861442; }
@@ -770,7 +770,7 @@ export default function App() {
         )}
 
         {/* ── FOOTER ── */}
-        <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />
+        {report && <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />}
 
         {report && <SubscribeBar appName="PWR Score" url={url} score={report?.overallScore || ""} />}
 
