@@ -363,7 +363,7 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .kot-section-header { background: #1a1a18; padding: 1.25rem clamp(16px,4vw,2rem) 0.75rem; }
+        .kot-section-header { background: #1a1a18; padding: 1.75rem clamp(16px,4vw,2rem) 0.75rem; }
         .kot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
         .kot-section-header h2 .power-word { font-weight: 600; color: #f0ede8; }
         .kot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
@@ -388,7 +388,7 @@ export default function App() {
 
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,4vw,24px) clamp(18px,4vw,28px); margin-bottom: 14px; }
         .card-label { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #be3650; margin-bottom: 14px; }
-        .card-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; }
+        .card-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.6; color: #f0ede8; }
 
         .kot-score-num { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(72px,13vw,108px); line-height: 1; letter-spacing: -0.04em; color: #861442 !important; }
         .kot-score-den { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: #f0ede8; padding-bottom: 8px; }
@@ -400,7 +400,7 @@ export default function App() {
         .power-title { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: #f0ede8; }
         .power-letter { color: #be3650; margin-right: 4px; }
         .power-score-val { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); white-space: nowrap; }
-        .power-content { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; margin-top: 10px; }
+        .power-content { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.6; color: #f0ede8; margin-top: 10px; }
 
         .kot-field { width: 100%; padding: 10px 14px; background: #111110 !important; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8 !important; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-text-fill-color: #f0ede8 !important; caret-color: #f0ede8; }
         .kot-field:focus { border-color: #861442; background: #111110 !important; }
@@ -580,7 +580,7 @@ export default function App() {
             </div>
 
             {/* ── EMAIL GATE ── */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want a Demo Website?</h3>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want Your Money Moves?</h3>
 
             {!emailSubmitted ? (
               <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
@@ -647,11 +647,11 @@ export default function App() {
                     {/* Services */}
                     {revenue.services?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🛠️ Your Services</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🛠️ Your Services</p>
                         {revenue.services.map((s, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{s.name}</strong> — {s.note}</p>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{s.name}</strong> — {s.note}</p>
                           </div>
                         ))}
                       </div>
@@ -662,7 +662,7 @@ export default function App() {
                     {/* Sleeping Giant */}
                     {revenue.sleepingGiant && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🎯 Sleeping Giant</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🎯 Sleeping Giant</p>
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.7, color: "#f0ede8", margin: 0 }}>{revenue.sleepingGiant}</p>
                       </div>
                     )}
@@ -672,13 +672,13 @@ export default function App() {
                     {/* Customer FAQ */}
                     {revenue.faqs?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>❓ Customer FAQ</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>❓ Customer FAQ</p>
                         {revenue.faqs.map((f, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
                             <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{f.question}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{f.question}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
                                 <span style={{ color: f.answered ? "#4caf8a" : "#c0705a", fontWeight: 500 }}>{f.answered ? "✓ Answered" : "✗ Not answered"}</span> — {f.note}
                               </p>
                             </div>
@@ -691,11 +691,11 @@ export default function App() {
                     {/* Trends */}
                     {revenue.trends?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
                         {revenue.trends.map((t, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
                           </div>
                         ))}
                       </div>
@@ -707,11 +707,11 @@ export default function App() {
                     {/* Competitors */}
                     {revenue.competitors?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🏁 Competitors</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🏁 Competitors</p>
                         {revenue.competitors.map((c, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{c.name}</strong> — {c.win}</p>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{c.name}</strong> — {c.win}</p>
                           </div>
                         ))}
                       </div>
@@ -722,13 +722,13 @@ export default function App() {
                     {/* Revenue Moves */}
                     {revenue.revenueMoves?.length > 0 && (
                       <div>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>💰 Revenue Moves</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>💰 Revenue Moves</p>
                         {revenue.revenueMoves.map((m, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
                             <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{m.move}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>{m.why}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{m.move}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>{m.why}</p>
                             </div>
                           </div>
                         ))}
