@@ -372,8 +372,8 @@ export default function App() {
         .kot-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
         .kot-hero-right-placeholder { width: 100%; height: 100%; background: #1a1a18; border-left: 1px solid rgba(255,255,255,0.06); }
 
-        .kot-dim-bar { background: #111110; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .kot-dim-col { flex: 1; text-align: center; padding: 10px 4px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ede8; }
+        .kot-dim-bar { background: #111110; display: flex; align-items: center; border-top: 1.5px solid rgba(134,20,66,0.5); border-bottom: 1.5px solid rgba(134,20,66,0.5); }
+        .kot-dim-col { flex: 1; text-align: center; padding: 8px 4px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ede8; }
         .kot-dim-pipe { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
         @media (max-width: 500px) { .kot-hero-right { display: none; } }
@@ -780,32 +780,33 @@ export default function App() {
         {/* ── FOOTER ── */}
         <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />
 
-        <div className="no-print" style={{ background: "#1a1a18", padding: "2rem clamp(16px,4vw,2rem)" }}>
-          <div style={{ background: "#242422", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "1.5rem", display: "flex", gap: "1.25rem", alignItems: "flex-start", flexWrap: "wrap" }}>
-            <div style={{ flex: 1, minWidth: 200 }}>
-              <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.4rem" }}>Let's Make Some Noise</div>
-              <p style={{ fontSize: 12, color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>Turn what you know into what you're known for. Weekly ideas on using AI to organize, share, and monetize your expertise.</p>
+        <div className="no-print" style={{ background: "#242422", padding: "2rem clamp(16px,4vw,2rem)" }}>
+          <div style={{ maxWidth: 860, margin: "0 auto" }}>
+            <div style={{ marginBottom: "1.25rem" }}>
+              <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.5rem" }}>Let's Make Some Noise</div>
+              <p style={{ fontSize: 14, fontWeight: 300, fontStyle: "italic", color: "#f0ede8", lineHeight: 1.5, margin: "0 0 0.35rem" }}>Turn what you know into what you're known for.</p>
+              <p style={{ fontSize: 13, fontWeight: 300, color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>Subscribe to get weekly ideas on how to use AI to organize, share, and monetize your expertise.</p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 220, flex: "0 0 260px" }}>
-              {!newsletterSubmitted ? (
-                <>
+            {!newsletterSubmitted ? (
+              <>
+                <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                   <input type="text" value={newsletterFirstName} onChange={(e) => setNewsletterFirstName(e.target.value)}
                     placeholder="First name"
-                    style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
+                    style={{ flex: 1, background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
                   <input type="email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleNewsletterSubmit()}
                     placeholder="your@email.com"
-                    style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
+                    style={{ flex: 2, background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
                   <button onClick={handleNewsletterSubmit} disabled={!newsletterEmail.trim()}
-                    style={{ background: "#861442", color: "#fff", border: "none", borderRadius: 10, padding: "10px 22px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: newsletterEmail.trim() ? "pointer" : "not-allowed", opacity: newsletterEmail.trim() ? 1 : 0.4, transition: "opacity .18s" }}>
-                    Subscribe Now
+                    style={{ background: "#861442", color: "#fff", border: "none", borderRadius: 8, padding: "9px 20px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", cursor: newsletterEmail.trim() ? "pointer" : "not-allowed", opacity: newsletterEmail.trim() ? 1 : 0.4, transition: "opacity .18s" }}>
+                    Subscribe Now →
                   </button>
-                  <p style={{ fontSize: 11, color: "#5a5a56", lineHeight: 1.6, margin: 0 }}>By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.</p>
-                </>
-              ) : (
-                <p style={{ fontSize: 13, color: "#4caf8a", fontWeight: 400 }}>✓ You're in! Watch for Let's Make Some Noise.</p>
-              )}
-            </div>
+                </div>
+                <p style={{ fontSize: 11, color: "#5a5a56", lineHeight: 1.6, margin: 0 }}>By submitting, you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.</p>
+              </>
+            ) : (
+              <p style={{ fontSize: 13, color: "#4caf8a", fontWeight: 400 }}>✓ You're in! Watch for Let's Make Some Noise.</p>
+            )}
           </div>
         </div>
 
