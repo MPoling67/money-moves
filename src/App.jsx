@@ -390,13 +390,14 @@ export default function App() {
         .kot-anim { animation: fadeUp 0.5s ease both; }
 
         .kot-hero { width:100%; background:#111110; display:flex; align-items:stretch; min-height:280px; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .kot-hero-left { flex:1; padding:2.5rem clamp(16px,4vw,2.5rem); display:flex; flex-direction:column; justify-content:center; gap:14px; }
-        .kot-hero-logo { display:flex; align-items:center; gap:12px; }
-        .kot-hero-title { font-family:var(--font-display); font-size:clamp(36px,6vw,52px); color:#f0ede8; line-height:1; letter-spacing:-0.02em; }
+        .kot-hero-left { flex:1; display:flex; align-items:center; padding:2.5rem clamp(16px,4vw,2rem); }
+        .kot-hero-logo { display:flex; align-items:center; gap:14px; }
+        .kot-hero-inner { display:flex; flex-direction:column; gap:14px; }
+        .kot-hero-title { font-family:var(--font-display); font-size:clamp(32px,5vw,48px); color:#f0ede8; line-height:1.05; letter-spacing:-0.02em; }
         .kot-hero-title strong { font-weight:600; color:#f0ede8; }
         .kot-hero-title em { font-weight:300; font-style:italic; color:#be3650; }
-        .kot-hero-lead { font-family:var(--font-body); font-size:15px; font-weight:500; line-height:1.5; color:#f0ede8; max-width:540px; margin:0; }
-        .kot-hero-body { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.65; color:var(--muted); max-width:540px; margin:0; }
+        .kot-hero-lead { font-family:var(--font-body); font-size:15px; font-weight:500; line-height:1.5; color:#f0ede8; margin:0; }
+        .kot-hero-body { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.65; color:var(--muted); margin:0; }
         .kot-hero-right { flex:0 0 260px; min-width:220px; max-width:260px; overflow:hidden; align-self:stretch; }
         .kot-hero-right img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
         @media (max-width:600px) { .kot-hero-right { display:none; } }
@@ -460,20 +461,19 @@ export default function App() {
       {/* ── HERO ── */}
       <div className="kot-hero">
         <div className="kot-hero-left">
-          <div className="kot-hero-logo">
-            <svg width="36" height="36" viewBox="0 0 54 54" fill="none">
-              <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
-              <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
-              <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
-              <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
-            </svg>
-            <span className="kot-hero-label">Knowledge on Tap</span>
+          <div className="kot-hero-inner">
+            <div className="kot-hero-logo">
+              <svg width="36" height="36" viewBox="0 0 54 54" fill="none">
+                <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
+                <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
+                <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
+                <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
+              </svg>
+              <div className="kot-hero-title"><strong>POWER</strong> <em>Score</em></div>
+            </div>
+            <p className="kot-hero-lead">Is your website working as hard as you do?</p>
+            <p className="kot-hero-body">Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the bragging points you might be overlooking.</p>
           </div>
-          <div className="kot-hero-title">
-            <strong>POWER</strong> <em>Score</em>
-          </div>
-          <p className="kot-hero-lead">Find out how distinctly your business is positioned to stand out and win.</p>
-          <p className="kot-hero-body">Enter your URL and get your free POWER Score in seconds. No email required.</p>
         </div>
         <div className="kot-hero-right">
           <img src="/power-score-hero.png" alt="POWER Score" />
@@ -710,7 +710,7 @@ export default function App() {
       <div className="page-footer-rule" />
       <footer className="page-footer no-print">
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
-          © 2026 POWER Score &nbsp;·&nbsp; Knowledge on Tap &nbsp;·&nbsp; <a href="https://monicapoling.com/knowledge-on-tap" target="_blank" rel="noopener noreferrer">monicapoling.com/knowledge-on-tap</a>
+          © 2026 POWER Score &nbsp;·&nbsp; Data on Tap &nbsp;·&nbsp; <a href="https://monicapoling.com/data-on-tap" target="_blank" rel="noopener noreferrer">monicapoling.com</a>
         </div>
       </footer>
 
