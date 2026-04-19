@@ -454,11 +454,23 @@ export default function App() {
           <div className="kot-hero-left">
             <div className="kot-hero-logo">
               <div style={{ flexShrink: 0, lineHeight: 0 }}>
-                <svg width="36" height="36" viewBox="0 0 54 54" fill="none">
-                  <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
-                  <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
-                  <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
-                  <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
+                <svg width="36" height="36" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="64" height="64" fill="#111110" rx="8"/>
+                  <g transform="translate(4, 6) scale(0.0373)">
+                    <defs>
+                      <clipPath id="ca"><path d="M 40 246 L 732 246 L 732 1253 L 40 1253 Z" clipRule="nonzero"/></clipPath>
+                      <clipPath id="cb"><path d="M 731 557 L 1460 557 L 1460 1253 L 731 1253 Z" clipRule="nonzero"/></clipPath>
+                    </defs>
+                    <g clipPath="url(#ca)">
+                      <path fill="#861442" d="M 696.089844 827.296875 C 643.375 723.464844 532.046875 454.449219 673.273438 246.785156 C 668.160156 253.46875 465.5625 520.128906 461.238281 766.335938 C 495.066406 808.417969 528.507812 842.242188 552.898438 865.054688 C 578.46875 889.046875 598.53125 918.148438 611.511719 950.792969 L 731.496094 1252.847656 C 731.101562 1252.457031 720.480469 1245.769531 444.714844 1066.816406 C 377.835938 1023.554688 336.136719 959.839844 311.355469 888.257812 C 195.304688 817.859375 58.402344 698.292969 40.308594 519.734375 C 40.308594 519.734375 65.089844 1099.460938 398.292969 1176.15625 C 731.496094 1253.242188 731.496094 1253.242188 731.496094 1253.242188 L 722.054688 927.980469 C 720.875 892.585938 711.828125 858.367188 696.089844 827.296875 Z"/>
+                    </g>
+                    <path fill="#ffffff" fillOpacity="0.55" d="M 514.738281 1009.789062 L 731.101562 1252.457031 C 729.53125 1250.488281 712.613281 1227.679688 525.359375 979.503906 C 477.367188 915.789062 459.664062 841.847656 461.238281 765.941406 C 376.65625 660.144531 288.929688 501.25 332.597656 327.410156 C 327.875 342.75 231.890625 657.785156 311.355469 887.472656 C 357.773438 915.398438 400.652344 935.847656 430.945312 948.828125 C 462.808594 962.984375 491.527344 983.832031 514.738281 1009.789062 Z"/>
+                    <path fill="#861442" d="M 929.765625 874.886719 C 955.335938 853.648438 990.347656 821.789062 1026.539062 781.28125 C 1035.195312 537.039062 849.515625 262.515625 842.039062 251.503906 C 971.859375 466.246094 846.761719 728.972656 788.539062 829.65625 C 771.230469 859.941406 760.609375 893.765625 757.855469 928.769531 L 731.496094 1252.847656 L 867.214844 957.480469 C 881.773438 925.621094 903.015625 897.304688 929.765625 874.886719 Z"/>
+                    <path fill="#ffffff" fillOpacity="0.55" d="M 731.890625 1252.0625 L 960.058594 1021.589844 C 984.839844 996.808594 1014.34375 977.539062 1047.390625 965.738281 C 1078.46875 954.332031 1122.527344 936.242188 1170.128906 910.675781 C 1262.183594 682.957031 1180.355469 359.269531 1177.996094 349.828125 C 1212.613281 525.636719 1116.625 680.203125 1026.539062 781.28125 C 1023.785156 857.1875 1002.542969 929.949219 951.007812 990.910156 C 760.605469 1217.84375 735.035156 1248.128906 731.890625 1252.0625 Z"/>
+                    <g clipPath="url(#cb)">
+                      <path fill="#861442" d="M 1170.128906 910.675781 C 1141.804688 981.078125 1096.5625 1042.039062 1027.71875 1082.15625 C 731.496094 1253.242188 731.496094 1253.242188 731.496094 1253.242188 C 731.496094 1253.242188 731.496094 1253.242188 1068.238281 1193.855469 C 1404.984375 1134.464844 1460.058594 557.097656 1460.058594 557.097656 C 1432.519531 734.085938 1289.324219 846.175781 1170.128906 910.675781 Z"/>
+                    </g>
+                  </g>
                 </svg>
               </div>
               <div className="kot-hero-title"><strong>POWER</strong> <em>Score</em></div>
@@ -587,10 +599,6 @@ export default function App() {
             {!emailSubmitted ? (
               <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
                 <p className="card-label">Money Moves</p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", margin: "0 0 8px" }}>Subscribe to Unlock Your Money Moves</p>
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", marginBottom: 16 }}>
-                  Drop your name and email to get more intel:
-                </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
                   {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -602,7 +610,8 @@ export default function App() {
                     </div>
                   ))}
                 </div>
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", margin: "0 0 10px" }}>Subscribe Now</p>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
                   <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
                     placeholder="First name" className="kot-field" style={{ flex: 1, minWidth: 140 }} />
                   <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
@@ -610,20 +619,16 @@ export default function App() {
                     placeholder="Email address" className="kot-field" style={{ flex: 2, minWidth: 200 }} />
                 </div>
                 {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
-
-                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", marginBottom: 12 }}>
-                  <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
-                    style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer" }} />
-                  I understand
-                </label>
                 <button className="btn-primary" onClick={handleEmailSubmit}
                   disabled={emailSubmitting || !email.trim() || !firstName.trim()}
                   style={{ marginBottom: 12 }}>
                   {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
                 </button>
-                <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, color: "#5a5a56", lineHeight: 1.6 }}>
-                  By requesting this intel, I'll be subscribed to Let's Make Some Noise. I can unsubscribe any time.
-                </p>
+                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#5a5a56", lineHeight: 1.6 }}>
+                  <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
+                    style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
+                  I understand that by requesting this intel, I'll be subscribed to Let's Make Some Noise. I can unsubscribe any time.
+                </label>
               </div>
             ) : (
               <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#4caf8a", marginBottom: 14 }}>
