@@ -49,7 +49,7 @@ export default async function handler(req, res) {
           messages: [
             {
               role: 'user',
-              content: `Here is the actual current content scraped from the website ${urlMatch[0]}:\n\n${pageContent}\n\nUsing ONLY the above content, generate the Prestige Score JSON.`
+              content: `Here is the live content scraped directly from ${urlMatch[0]}:\n\n${pageContent}\n\nUsing this as your primary source, plus any additional subpages you can discover from links within this content, generate the full POWER Score JSON. Follow the instructions in the system prompt exactly.`
             }
           ]
         };
