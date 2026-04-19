@@ -573,18 +573,16 @@ export default function App() {
               </div>
             </div>
 
-            {/* About */}
+            {/* About + POWER Breakdown — one box */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>
               About {report.businessName} <span style={{ fontWeight: 300, fontSize: 16, color: "var(--muted)", fontStyle: "normal" }}>| {url}</span>
             </h3>
             <div className="card kot-anim" style={{ animationDelay: "0.1s" }}>
               <p className="card-label">About {report.businessName}</p>
               <p className="card-body">{report.orgParagraph}</p>
-            </div>
 
-            {/* POWER Breakdown */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>P·O·W·E·R Score Breakdown</h3>
-            <div className="card kot-anim" style={{ animationDelay: "0.15s" }}>
+              <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
+
               <p className="card-label">P·O·W·E·R Score Breakdown</p>
               {POWER_SECTIONS.map(({ key, letter, label, sub }) => {
                 const section = report[key];
@@ -653,7 +651,7 @@ export default function App() {
             {/* ── BUCKET 2 — REVENUE MAPPING ── */}
             {emailSubmitted && (
               <>
-                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Revenue Mapping</h3>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Money Moves</h3>
                 {revenueLoading && (
                   <div className="card kot-anim">
                     <PulseLoader text="Building your revenue map..." />
@@ -666,12 +664,12 @@ export default function App() {
                 )}
                 {revenue && (
                   <div className="card kot-anim">
-                    <p className="card-label">Are you leaving money on the table?</p>
+                    <p className="card-label">Money Moves</p>
 
                     {/* Services */}
                     {revenue.services?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>Your Services</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🛠️ Your Services</p>
                         {revenue.services.map((s, i) => (
                           <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
                             <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
@@ -688,21 +686,6 @@ export default function App() {
                       <div style={{ marginBottom: 20 }}>
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🎯 Sleeping Giant</p>
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.7, color: "#f0ede8", margin: 0 }}>{revenue.sleepingGiant}</p>
-                      </div>
-                    )}
-
-                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
-
-                    {/* Trends */}
-                    {revenue.trends?.length > 0 && (
-                      <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
-                        {revenue.trends.map((t, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
-                          </div>
-                        ))}
                       </div>
                     )}
 
@@ -725,6 +708,21 @@ export default function App() {
                         ))}
                       </div>
                     )}
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Trends */}
+                    {revenue.trends?.length > 0 && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
+                        {revenue.trends.map((t, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
 
                     <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
@@ -764,17 +762,7 @@ export default function App() {
               </>
             )}
 
-            {/* About These Results */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>About These Results</h3>
-            <div className="card kot-anim">
-              <p className="card-label">About These Results</p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 12 }}>
-                These results were generated using Monica Poling's proprietary Revenue Mapping framework, developed over 20+ years of helping businesses turn what they know into what they're known for.
-              </p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", margin: 0 }}>
-                Learn More: <a href="https://monicapoling.com/revenue-mapping/" target="_blank" rel="noopener noreferrer" style={{ color: "#be3650", textDecoration: "none", fontWeight: 500 }}>monicapoling.com/revenue-mapping</a>
-              </p>
-            </div>
+
 
             {/* Print */}
             <div className="card kot-anim no-print" style={{ marginTop: 14 }}>
