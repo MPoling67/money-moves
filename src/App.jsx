@@ -50,7 +50,7 @@ REQUIRED SEQUENCE — follow exactly:
 4. Before writing the report, list internally 5+ SPECIFIC details from the page you just read. These details MUST appear in your report.
 5. Write the report using ONLY those fetched details.
 
-WARNING: Training memory is FORBIDDEN. Only what is on the page TODAY counts.
+WARNING: The URL being analyzed is ${url}. You have NO prior knowledge of this business that is reliable. Your training data about this person or business is FORBIDDEN — it is outdated and inaccurate. Only what you read from the live page right now is valid.
 
 Record every URL attempted in urlsAttempted. If you truly cannot fetch content after all attempts, set fetchSuccess to false, explain in fetchNote, and score conservatively (8/20 max per dimension). Return the full JSON.`
   }]);
