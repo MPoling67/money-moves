@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// ── LOGGER URL ────────────────────────────────────────────────────────────────
+// ── LOGGER ────────────────────────────────────────────────────────────────────
 const LOGGER = "https://script.google.com/macros/s/AKfycbwvztxaVKSDYhevhsjQ7LowAMvjBu4ONs2AqXytbNflmEJ_mfBF7mI54fgyhBZzhU8M/exec";
 
 // ── SYSTEM PROMPT ─────────────────────────────────────────────────────────────
@@ -57,7 +57,7 @@ JSON Schema:
     "originStory": "A 2-sentence founder/origin statement written as if for their About section. Specific to what you read.",
     "originNote": "One sentence: where the origin story currently lives (or doesn't) and what that costs them.",
     "proofPoints": [
-      { "label": "string", "text": "string", "missing": true/false, "missingNote": "string if missing" }
+      { "label": "string", "text": "string", "missing": true, "missingNote": "string" }
     ],
     "gapLine": "One sharp sentence summarizing the single biggest gap between what the site says and what buyers need to hear."
   },
@@ -70,7 +70,7 @@ JSON Schema:
 overallScore = sum of five scores (each /20, total /100).
 90-100: Category Leader | 75-89: Strong Foundation, Underloaded Story | 60-74: Solid Presence, Clear Gaps | 45-59: Underdeveloped Positioning | Below 45: Significant Opportunity
 
-For mockup.proofPoints: return exactly 4 items using whatever proof signals exist (subscriber count, creator names, research depth, testimonials, awards, partnerships, case studies, etc). Set missing:true if the signal exists but is buried or absent from the homepage. Include missingNote only when missing:true.`;
+For mockup.proofPoints: return exactly 4 items using whatever proof signals exist. Set missing:true if the signal exists but is buried or absent from the homepage. Include missingNote only when missing:true.`;
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 function normalizeUrl(input) {
@@ -81,13 +81,8 @@ function normalizeUrl(input) {
 }
 
 async function callAPI(system, messages) {
-  const body = {
-    model: "claude-sonnet-4-6",
-    max_tokens: 3000,
-    system,
-    messages,
-    tools: [{ type: "web_search_20250305", name: "web_search" }],
-  };
+  const body = { model: "claude-sonnet-4-6", max_tokens: 3000, system, messages,
+    tools: [{ type: "web_search_20250305", name: "web_search" }] };
   const r = await fetch("/api/anthropic", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -118,10 +113,10 @@ REQUIRED SEQUENCE — follow exactly:
    - ${url}/
    - ${url.replace(/^https:\/\//, "https://www.")}
    - ${url.replace(/^https:\/\/www\./, "https://")}
-4. Before writing the report, list internally 5+ SPECIFIC details from the page you just read (exact services, exact phrases, exact people, exact CTAs, exact page sections). These details MUST appear in your report.
+4. Before writing the report, list internally 5+ SPECIFIC details from the page you just read. These details MUST appear in your report.
 5. Write the report using ONLY those fetched details.
 
-WARNING: If you recognize this business or person from your training data, that knowledge is FORBIDDEN. You may only use what you read from the live URL right now.
+WARNING: Training memory is FORBIDDEN. Only what is on the page TODAY counts.
 
 Record every URL attempted in urlsAttempted. If you truly cannot fetch content after all attempts, set fetchSuccess to false, explain in fetchNote, and score conservatively (8/20 max per dimension). Return the full JSON.`
   }]);
@@ -149,10 +144,8 @@ const LOAD_STEPS = [
 function PulseLoader({ text }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "4px 0" }}>
-      <span style={{
-        width: 5, height: 5, borderRadius: "50%", background: "#861442",
-        display: "inline-block", animation: "kot-pulse 1.2s ease-in-out infinite", flexShrink: 0,
-      }} />
+      <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#861442",
+        display: "inline-block", animation: "kot-pulse 1.2s ease-in-out infinite", flexShrink: 0 }} />
       <span style={{ fontSize: 14, color: "#f0ede8", fontStyle: "italic", fontWeight: 300, opacity: 0.6 }}>{text}</span>
     </div>
   );
@@ -161,7 +154,7 @@ function PulseLoader({ text }) {
 function ScoreBar({ score, max }) {
   const pct = Math.round((Math.min(score, max) / max) * 100);
   return (
-    <div style={{ background: "#2e2e2b", borderRadius: 2, height: 3, overflow: "hidden" }}>
+    <div style={{ background: "#f0ede8", borderRadius: 2, height: 3, overflow: "hidden" }}>
       <div style={{ height: "100%", width: `${pct}%`, background: "#861442", borderRadius: 2, animation: "kot-bar 1.2s ease forwards" }} />
     </div>
   );
@@ -169,7 +162,9 @@ function ScoreBar({ score, max }) {
 
 function MissingBadge({ note }) {
   return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 4, background: "rgba(192,112,90,0.12)", border: "1px solid rgba(192,112,90,0.25)", borderRadius: 4, padding: "2px 7px", fontSize: 10, color: "#c0705a", fontWeight: 500, marginTop: 7 }}>
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 4, background: "rgba(192,112,90,0.12)",
+      border: "1px solid rgba(192,112,90,0.25)", borderRadius: 4, padding: "2px 7px",
+      fontSize: 10, color: "#c0705a", fontWeight: 500, marginTop: 7 }}>
       ⚠ {note || "Not on homepage"}
     </div>
   );
@@ -177,25 +172,26 @@ function MissingBadge({ note }) {
 
 function GapNote({ children }) {
   return (
-    <div style={{ fontSize: 11, fontWeight: 300, color: "#5a5a56", lineHeight: 1.6, margin: "10px 0 0", padding: "8px 10px", background: "rgba(255,255,255,0.03)", borderLeft: "2px solid #861442", borderRadius: "0 4px 4px 0" }}>
+    <div style={{ fontSize: 11, fontWeight: 300, color: "#5a5a56", lineHeight: 1.6, margin: "10px 0 0",
+      padding: "8px 10px", background: "rgba(255,255,255,0.03)", borderLeft: "2px solid #861442", borderRadius: "0 4px 4px 0" }}>
       <strong style={{ color: "#be3650", fontWeight: 500 }}>What's missing now: </strong>{children}
     </div>
   );
 }
 
-// ── WEBSITE MOCKUP COMPONENT ──────────────────────────────────────────────────
 function WebsiteMockup({ mockup, businessName, url }) {
   if (!mockup) return null;
   const domain = (() => { try { return new URL(normalizeUrl(url)).hostname; } catch { return url; } })();
-
   return (
-    <div style={{ background: "#1a1a18", borderRadius: 12, overflow: "hidden", fontFamily: "'Plus Jakarta Sans', sans-serif", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <div style={{ background: "#1a1a18", borderRadius: 12, overflow: "hidden",
+      fontFamily: "'Plus Jakarta Sans', sans-serif", border: "1px solid rgba(255,255,255,0.08)" }}>
 
       {/* Intro */}
       <div style={{ background: "#111110", padding: "1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase", color: "#be3650", marginBottom: 6 }}>Your Site Through a Buyer's Eyes</div>
         <p style={{ fontSize: 13, fontWeight: 300, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0 }}>
-          This is what <strong style={{ color: "#f0ede8", fontWeight: 500 }}>{businessName}'s</strong> website <strong style={{ color: "#f0ede8", fontWeight: 500 }}>could say</strong> if your POWER score variables were doing the work. The gaps are where your score is being lost.
+          This is what <strong style={{ color: "#f0ede8", fontWeight: 500 }}>{businessName}'s</strong> website{" "}
+          <strong style={{ color: "#f0ede8", fontWeight: 500 }}>could say</strong> if your POWER score variables were doing the work. The gaps are where your score is being lost.
         </p>
       </div>
 
@@ -215,24 +211,29 @@ function WebsiteMockup({ mockup, businessName, url }) {
           Hero Section <span style={{ background: "#861442", color: "#fff", fontSize: 9, padding: "2px 6px", borderRadius: 3, letterSpacing: ".08em" }}>PRESTIGE + WOW</span>
         </div>
         {mockup.currentHeroNote && (
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(190,54,80,0.12)", border: "1px solid rgba(190,54,80,0.25)", borderRadius: 6, padding: "4px 10px", fontSize: 11, color: "#be3650", fontWeight: 500, marginBottom: 10 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(190,54,80,0.12)",
+            border: "1px solid rgba(190,54,80,0.25)", borderRadius: 6, padding: "4px 10px",
+            fontSize: 11, color: "#be3650", fontWeight: 500, marginBottom: 10 }}>
             <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#be3650" }} />
             Currently: {mockup.currentHeroNote}
           </div>
         )}
-        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: "clamp(18px,3vw,26px)", fontWeight: 600, color: "#f0ede8", lineHeight: 1.3, margin: "0 0 8px" }}>{mockup.heroHeadline}</div>
+        <div style={{ fontFamily: "'Fraunces',Georgia,serif", fontSize: "clamp(18px,3vw,26px)", fontWeight: 600,
+          color: "#f0ede8", lineHeight: 1.3, margin: "0 0 8px" }}>{mockup.heroHeadline}</div>
         <div style={{ fontSize: 13, fontWeight: 300, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, margin: "0 0 14px", maxWidth: 520 }}>{mockup.heroSub}</div>
         <div style={{ display: "inline-block", background: "#861442", color: "#fff", fontSize: 12, fontWeight: 500, padding: "8px 18px 10px", borderRadius: 8 }}>{mockup.heroCta}</div>
       </div>
 
-      {/* Origin / About */}
+      {/* Origin */}
       {mockup.originStory && (
         <div style={{ padding: "1.25rem 1.5rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
           <div style={{ fontSize: 10, fontWeight: 500, letterSpacing: ".14em", textTransform: "uppercase", color: "#5a5a56", marginBottom: 10, display: "flex", alignItems: "center", gap: 6 }}>
             About / Origin <span style={{ background: "#861442", color: "#fff", fontSize: 9, padding: "2px 6px", borderRadius: 3, letterSpacing: ".08em" }}>OWNERSHIP</span>
           </div>
           <div style={{ background: "#242422", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, padding: 14, display: "flex", gap: 12 }}>
-            <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#861442", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Fraunces',Georgia,serif", fontSize: 14, color: "#fff", fontStyle: "italic" }}>
+            <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#861442", flexShrink: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontFamily: "'Fraunces',Georgia,serif", fontSize: 14, color: "#fff", fontStyle: "italic" }}>
               {businessName?.[0] || "B"}
             </div>
             <div>
@@ -389,331 +390,394 @@ export default function App() {
         @keyframes fadeUp { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
         .kot-anim { animation: fadeUp 0.5s ease both; }
 
-        .kot-hero { width:100%; background:#111110; display:flex; align-items:stretch; min-height:280px; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .kot-hero-left { flex:1; display:flex; align-items:center; padding:2.5rem clamp(16px,4vw,2rem); }
-        .kot-hero-logo { display:flex; align-items:center; gap:14px; }
-        .kot-hero-inner { display:flex; flex-direction:column; gap:14px; }
-        .kot-hero-title { font-family:var(--font-display); font-size:clamp(32px,5vw,48px); color:#f0ede8; line-height:1.05; letter-spacing:-0.02em; }
-        .kot-hero-title strong { font-weight:600; color:#f0ede8; }
-        .kot-hero-title em { font-weight:300; font-style:italic; color:#be3650; }
-        .kot-hero-lead { font-family:var(--font-body); font-size:15px; font-weight:500; line-height:1.5; color:#f0ede8; margin:0; }
-        .kot-hero-body { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.65; color:var(--muted); margin:0; }
-        .kot-hero-right { flex:0 0 260px; min-width:220px; max-width:260px; overflow:hidden; align-self:stretch; }
-        .kot-hero-right img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-        @media (max-width:600px) { .kot-hero-right { display:none; } }
+        .kot-hero { width: 100%; background: #111110; display: flex; align-items: stretch; min-height: 220px; max-height: 280px; }
+        .kot-hero-left { flex: 3; padding: 2rem clamp(16px,4vw,2rem); display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+        .kot-hero-logo { display: flex; align-items: center; gap: 14px; }
+        .kot-hero-title { font-family: var(--font-display); font-size: clamp(36px,6vw,52px); color: #f0ede8; line-height: 1; letter-spacing: -0.02em; }
+        .kot-hero-title strong { font-weight: 600; color: #f0ede8; }
+        .kot-hero-title em { font-weight: 300; font-style: italic; color: #be3650; }
+        .kot-hero-sub { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.4; color: var(--muted); max-width: 520px; }
+        .kot-hero-right { flex: 0 0 230px; min-width: 200px; max-width: 230px; position: relative; overflow: hidden; background: #1a1a18; }
+        .kot-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+        .kot-hero-right-placeholder { width: 100%; height: 100%; background: #1a1a18; border-left: 1px solid rgba(255,255,255,0.06); }
 
-        .kot-dim-bar { background:#111110; display:flex; align-items:center; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .kot-dim-col { flex:1; text-align:center; padding:10px 4px; font-family:var(--font-body); font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#f0ede8; }
-        .kot-dim-pipe { width:1px; height:18px; background:rgba(255,255,255,0.12); flex-shrink:0; }
+        .kot-dim-bar { background: #111110; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .kot-dim-col { flex: 1; text-align: center; padding: 10px 4px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ede8; }
+        .kot-dim-pipe { width: 1px; height: 18px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
-        .page-footer-rule { width:100%; height:1.5px; background:rgba(134,20,66,0.5); margin:1.75rem 0 0; }
+        @media (max-width: 500px) { .kot-hero-right { display: none; } }
 
-        .kot-input-zone { background:#1a1a18; padding:1rem clamp(16px,4vw,2rem) 1.75rem; border-bottom:1px solid rgba(255,255,255,0.06); }
-        .kot-input-row { display:flex; gap:10px; flex-wrap:wrap; }
-        .kot-input-field { flex:1; min-width:200px; padding:10px 14px; background:#111110; border:1px solid rgba(255,255,255,0.4); border-radius:var(--radius); color:#f0ede8; -webkit-text-fill-color:#f0ede8; font-family:var(--font-body); font-size:14px; font-weight:300; outline:none; transition:border-color 0.2s; }
-        .kot-input-field:focus { border-color:#861442; }
-        .kot-input-field::placeholder { color:#5a5a56; opacity:1; }
+        .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .btn-primary { background:#861442 !important; color:#ffffff !important; border:none; font-family:var(--font-body); font-size:13px; font-weight:500; padding:10px 22px; border-radius:var(--radius); cursor:pointer; letter-spacing:0.04em; transition:opacity 0.15s,transform 0.1s; white-space:nowrap; }
-        .btn-primary:hover { opacity:0.88; }
-        .btn-primary:active { transform:scale(0.97); }
-        .btn-primary:disabled { opacity:0.35; cursor:not-allowed; }
-        .btn-ghost { background:transparent; color:var(--text); border:1px solid var(--border2); font-family:var(--font-body); font-size:13px; padding:10px 18px; border-radius:var(--radius); cursor:pointer; transition:color 0.15s,border-color 0.15s; }
-        .btn-ghost:hover { color:#be3650; border-color:#be3650; }
+        .kot-section-header { background: #1a1a18; padding: 1.75rem clamp(16px,4vw,2rem) 0.75rem; }
+        .kot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
+        .kot-section-header h2 .power-word { font-weight: 600; color: #f0ede8; }
+        .kot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
 
-        .kot-report-zone { background:var(--bg); padding:0 clamp(16px,4vw,2rem) 80px; }
-        .kot-report-head { padding:36px 0 24px; border-bottom:1px solid var(--border); }
-        .kot-report-name { font-family:var(--font-display); font-weight:300; font-size:clamp(22px,4vw,36px); letter-spacing:-0.02em; color:var(--text); margin-bottom:6px; line-height:1.1; }
-        .kot-report-date { font-family:var(--font-body); font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:#be3650; }
+        .kot-input-zone { background: #1a1a18; padding: 1rem clamp(16px,4vw,2rem) 1.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .kot-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .kot-input-field { flex: 1; min-width: 200px; padding: 10px 14px; background: #111110; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8; -webkit-text-fill-color: #f0ede8; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
+        .kot-input-field:focus { border-color: #861442; }
+        .kot-input-field::placeholder { color: #5a5a56; opacity: 1; }
 
-        .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:clamp(18px,4vw,24px) clamp(18px,4vw,28px); margin-bottom:14px; }
-        .card-label { font-family:var(--font-body); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#be3650; margin-bottom:14px; }
-        .card-body { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.8; color:#f0ede8; }
+        .btn-primary { background: #861442 !important; color: #ffffff !important; border: none; font-family: var(--font-body); font-size: 13px; font-weight: 500; padding: 10px 22px; border-radius: var(--radius); cursor: pointer; letter-spacing: 0.04em; transition: opacity 0.15s, transform 0.1s; white-space: nowrap; }
+        .btn-primary:hover { opacity: 0.88; }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+        .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border2); font-family: var(--font-body); font-size: 13px; padding: 10px 18px; border-radius: var(--radius); cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+        .btn-ghost:hover { color: #be3650; border-color: #be3650; }
 
-        .kot-score-num { font-family:var(--font-display); font-weight:300; font-style:italic; font-size:clamp(72px,13vw,108px); line-height:1; letter-spacing:-0.04em; color:#861442 !important; }
-        .kot-score-den { font-family:var(--font-display); font-size:22px; font-weight:300; color:var(--muted); padding-bottom:8px; }
+        .kot-report-zone { background: var(--bg); padding: 0 clamp(16px,4vw,2rem) 80px; }
+        .kot-report-head { padding: 36px 0 24px; border-bottom: 1px solid var(--border); }
+        .kot-report-name { font-family: var(--font-display); font-weight: 300; font-size: clamp(22px,4vw,36px); letter-spacing: -0.02em; color: var(--text); margin-bottom: 6px; line-height: 1.1; }
+        .kot-report-date { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #be3650; }
 
-        .power-row { padding:18px 0; border-bottom:1px solid var(--border); }
-        .power-row:first-child { padding-top:0; }
-        .power-row:last-child { border-bottom:none; padding-bottom:0; }
-        .power-meta { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:8px; }
-        .power-title { font-family:var(--font-body); font-size:14px; font-weight:500; color:#f0ede8; }
-        .power-letter { color:#be3650; margin-right:4px; }
-        .power-score-val { font-family:var(--font-body); font-size:14px; font-weight:500; color:var(--muted); white-space:nowrap; }
-        .power-content { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.8; color:#f0ede8; margin-top:10px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,4vw,24px) clamp(18px,4vw,28px); margin-bottom: 14px; }
+        .card-label { font-family: var(--font-body); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #be3650; margin-bottom: 14px; }
+        .card-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; }
 
-        .kot-field { width:100%; padding:10px 14px; background:#111110 !important; border:1px solid rgba(255,255,255,0.4); border-radius:var(--radius); color:#f0ede8 !important; font-family:var(--font-body); font-size:14px; font-weight:300; outline:none; transition:border-color 0.2s; -webkit-text-fill-color:#f0ede8 !important; caret-color:#f0ede8; }
-        .kot-field:focus { border-color:#861442; background:#111110 !important; }
-        .kot-field::placeholder { color:#5a5a56; opacity:1; }
+        .kot-score-num { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(72px,13vw,108px); line-height: 1; letter-spacing: -0.04em; color: #861442 !important; }
+        .kot-score-den { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: #f0ede8; padding-bottom: 8px; }
+
+        .power-row { padding: 18px 0; border-bottom: 1px solid var(--border); }
+        .power-row:first-child { padding-top: 0; }
+        .power-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .power-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+        .power-title { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: #f0ede8; }
+        .power-letter { color: #be3650; margin-right: 4px; }
+        .power-score-val { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); white-space: nowrap; }
+        .power-content { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; margin-top: 10px; }
+
+        .kot-field { width: 100%; padding: 10px 14px; background: #111110 !important; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8 !important; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-text-fill-color: #f0ede8 !important; caret-color: #f0ede8; }
+        .kot-field:focus { border-color: #861442; background: #111110 !important; }
+        .kot-field::placeholder { color: #5a5a56; opacity: 1; }
         .kot-field:-webkit-autofill,
         .kot-field:-webkit-autofill:hover,
-        .kot-field:-webkit-autofill:focus { -webkit-box-shadow:0 0 0 1000px #111110 inset !important; -webkit-text-fill-color:#f0ede8 !important; caret-color:#f0ede8; border-color:#861442; }
+        .kot-field:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0 1000px #111110 inset !important; -webkit-text-fill-color: #f0ede8 !important; caret-color: #f0ede8; border-color: #861442; }
 
-        .kot-debug-pre { padding:14px; background:var(--surface2); border:1px solid var(--border); border-radius:6px; color:var(--muted); font-size:12px; white-space:pre-wrap; word-break:break-word; line-height:1.6; font-family:var(--font-body); margin-top:8px; }
+        .kot-debug-pre { padding: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 12px; white-space: pre-wrap; word-break: break-word; line-height: 1.6; font-family: var(--font-body); margin-top: 8px; }
 
-        .page-footer { background:#111110; padding:1.25rem clamp(16px,4vw,2rem); font-family:var(--font-body); font-size:11px; font-weight:400; color:rgba(255,255,255,0.25); text-align:left; line-height:1.8; }
-        .page-footer a { color:rgba(255,255,255,0.3); text-decoration:none; }
-        .page-footer a:hover { color:#be3650; }
+        .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.25); text-align: left; line-height: 1.8; }
+        .page-footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
+        .page-footer a:hover { color: #be3650; }
 
-        @media print { .no-print { display:none !important; } body { background:#fff !important; color:#000 !important; } }
+        @media print {
+          .no-print { display: none !important; }
+          body { background: #fff !important; color: #000 !important; }
+          * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+          h3 { margin: 0.75rem 0 0.35rem !important; font-size: 18px !important; color: #000 !important; }
+          .card { background: #f7f7f7 !important; border: 1px solid #ddd !important; padding: 10px 14px !important; margin-bottom: 6px !important; }
+          .card-label { margin-bottom: 8px !important; color: #861442 !important; }
+          .card-body { color: #111 !important; line-height: 1.5 !important; }
+          .kot-report-head { padding: 12px 0 10px !important; border-bottom: 1px solid #ddd !important; }
+          .kot-report-name { font-size: 22px !important; color: #000 !important; }
+          .kot-report-date { color: #861442 !important; }
+          .kot-score-num { font-size: 48px !important; color: #861442 !important; }
+          .kot-score-den { color: #444 !important; }
+          .power-row { padding: 10px 0 !important; border-bottom: 1px solid #eee !important; }
+          .power-title { color: #000 !important; }
+          .power-letter { color: #861442 !important; }
+          .power-score-val { color: #444 !important; }
+          .power-content { color: #111 !important; line-height: 1.5 !important; }
+          .kot-report-zone { padding-bottom: 20px !important; background: #fff !important; }
+          .kot-dim-bar { background: #f0f0f0 !important; border-bottom: 1px solid #ddd !important; }
+          .kot-dim-col { color: #000 !important; }
+        }
+        @media (max-width: 600px) {
+          .kot-input-row { flex-direction: column; }
+        }
       `}</style>
 
-      {/* ── HERO ── */}
-      <div className="kot-hero">
-        <div className="kot-hero-left">
-          <div className="kot-hero-inner">
+      <div style={{ maxWidth: 860, margin: "0 auto", overflow: "hidden" }}>
+
+        {/* SEO hidden h1 */}
+        <h1 style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}>
+          POWER Score — Free Competitive Analysis Tool | Data on Tap
+        </h1>
+
+        {/* ── HERO ── */}
+        <div className="kot-hero no-print">
+          <div className="kot-hero-left">
             <div className="kot-hero-logo">
-              <svg width="36" height="36" viewBox="0 0 54 54" fill="none">
-                <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
-                <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
-                <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
-                <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
-              </svg>
+              <div style={{ flexShrink: 0, lineHeight: 0 }}>
+                <svg width="36" height="36" viewBox="0 0 54 54" fill="none">
+                  <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
+                  <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
+                  <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
+                  <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
+                </svg>
+              </div>
               <div className="kot-hero-title"><strong>POWER</strong> <em>Score</em></div>
             </div>
-            <p className="kot-hero-lead">Is your website working as hard as you do?</p>
-            <p className="kot-hero-body">Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the bragging points you might be overlooking.</p>
+            <div className="kot-hero-sub" style={{ lineHeight: 1.4 }}>
+              <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website working as hard as you do?</p>
+              <p>Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the bragging points you might be overlooking.</p>
+            </div>
+          </div>
+          <div className="kot-hero-right">
+            <img src="/power-score-hero.png" alt="POWER Score" />
           </div>
         </div>
-        <div className="kot-hero-right">
-          <img src="/power-score-hero.png" alt="POWER Score" />
+
+        <div className="page-footer-rule no-print" />
+
+        <div className="kot-dim-bar no-print">
+          <div className="kot-dim-col">Prestige</div>
+          <div className="kot-dim-pipe" />
+          <div className="kot-dim-col">Ownership</div>
+          <div className="kot-dim-pipe" />
+          <div className="kot-dim-col">Wow Factor</div>
+          <div className="kot-dim-pipe" />
+          <div className="kot-dim-col">Expertise</div>
+          <div className="kot-dim-pipe" />
+          <div className="kot-dim-col">Reputation</div>
         </div>
-      </div>
 
-      {/* ── DIMENSION BAR ── */}
-      <div className="kot-dim-bar">
-        {["Prestige", "Ownership", "Wow Factor", "Expertise", "Reputation"].map((d, i, arr) => (
-          <div key={d} style={{ display: "contents" }}>
-            <div className="kot-dim-col">{d}</div>
-            {i < arr.length - 1 && <div className="kot-dim-pipe" />}
-          </div>
-        ))}
-      </div>
+        <div className="page-footer-rule no-print" />
 
-      {/* ── INPUT ZONE ── */}
-      <div className="kot-input-zone">
-        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <div className="kot-section-header no-print">
+          <h2><span style={{ color: "#be3650" }}>Get Your</span> <span className="power-word">POWER</span> <span className="score-word">Score</span></h2>
+        </div>
+
+        {/* ── INPUT ZONE ── */}
+        <div className="kot-input-zone no-print">
           <div className="kot-input-row">
             <input
               type="url"
-              className="kot-input-field"
-              placeholder="yourwebsite.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && !loading && handleGenerate()}
-              disabled={loading}
+              placeholder="Enter your business URL"
+              className="kot-input-field"
             />
             <button className="btn-primary" onClick={handleGenerate} disabled={loading || !url.trim()}>
-              {loading ? progress || "Analyzing..." : "Get My POWER Score →"}
+              {loading ? "Analyzing..." : "Get My Score →"}
             </button>
           </div>
-          {error && <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "#c0705a", marginTop: 10 }}>{error}</p>}
-        </div>
-      </div>
-
-      {/* ── REPORT ZONE ── */}
-      {report && (
-        <div className="kot-report-zone" style={{ maxWidth: 860, margin: "0 auto" }}>
-
-          {/* Report header */}
-          <div className="kot-report-head">
-            <div className="kot-report-name">{report.businessName}</div>
-            <div className="kot-report-date">{report.dateGenerated}</div>
-          </div>
-
-          {/* Debug info (Monica only) */}
-          {isMonica && debugInfo && (
+          {loading && <div style={{ marginTop: 18 }}><PulseLoader text={progress} /></div>}
+          {error && (
             <div style={{ marginTop: 16 }}>
-              <button className="btn-ghost" style={{ fontSize: 11, padding: "6px 12px" }} onClick={() => setDebugOpen(!debugOpen)}>
-                {debugOpen ? "Hide" : "Show"} Fetch Debug
-              </button>
-              {debugOpen && <pre className="kot-debug-pre">{debugInfo}</pre>}
-            </div>
-          )}
-
-          {/* Score */}
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your POWER Score</h3>
-          <div className="card kot-anim">
-            <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 12 }}>
-              <span className="kot-score-num">{sc}</span>
-              <span className="kot-score-den">/100</span>
-            </div>
-            <div style={{ background: "#2e2e2b", borderRadius: 2, height: 3, overflow: "hidden", marginBottom: 16 }}>
-              <div style={{ height: "100%", width: `${sc}%`, background: "#861442", borderRadius: 2, animation: "kot-bar 1.2s ease forwards" }} />
-            </div>
-            <p className="card-body">{report.scoreParagraph}</p>
-          </div>
-
-          {/* About */}
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>About {report.businessName}</h3>
-          <div className="card kot-anim" style={{ animationDelay: "0.1s" }}>
-            <p className="card-label">About {report.businessName}</p>
-            <p className="card-body">{report.orgParagraph}</p>
-            {report.brandPersonality && (
-              <>
-                <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
-                <p className="card-label">Brand Personality</p>
-                <p className="card-body">{report.brandPersonality}</p>
-              </>
-            )}
-          </div>
-
-          {/* POWER Breakdown */}
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>P·O·W·E·R Breakdown</h3>
-          <div className="card kot-anim" style={{ animationDelay: "0.15s" }}>
-            <p className="card-label">P·O·W·E·R Score Breakdown</p>
-            {POWER_SECTIONS.map(({ key, letter, label, sub }) => {
-              const section = report[key];
-              if (!section) return null;
-              return (
-                <div key={key} className="power-row">
-                  <div className="power-meta">
-                    <span className="power-title"><span className="power-letter">{letter}</span>— {label}: {sub}</span>
-                    <span className="power-score-val">{section.score}/20</span>
-                  </div>
-                  <ScoreBar score={section.score} max={20} />
-                  <p className="power-content">{section.content}</p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ── EMAIL GATE ── */}
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Sleeping Giant + Site Mockup</h3>
-
-          {!emailSubmitted ? (
-            <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
-              <p className="card-label">Unlock Your Full Report</p>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 16 }}>
-                Drop your name and email to unlock the rest of your report:
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-                {["Your Sleeping Giant opportunity", "Your site through a buyer's eyes — with rewrites"].map((item) => (
-                  <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
-                      <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, color: "#f0ede8" }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
-                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="First name" className="kot-field" style={{ flex: 1, minWidth: 140 }} />
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
-                  placeholder="Email address" className="kot-field" style={{ flex: 2, minWidth: 200 }} />
-              </div>
-              {emailError && <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
-              <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", marginBottom: 12 }}>
-                <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
-                  style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer" }} />
-                Yes, add me to Let's Make Some Noise
-              </label>
-              <button className="btn-primary" onClick={handleEmailSubmit}
-                disabled={emailSubmitting || !email.trim() || !firstName.trim()}
-                style={{ marginBottom: 12 }}>
-                {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
-              </button>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "#5a5a56", lineHeight: 1.6 }}>
-                By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.
-              </p>
-            </div>
-          ) : (
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "#4caf8a", marginBottom: 14 }}>
-              ✓ Report unlocked — your full intel is below.
-            </p>
-          )}
-
-          {/* ── BUCKET 2 — SLEEPING GIANT + MOCKUP ── */}
-          {emailSubmitted && (
-            <>
-              {/* Sleeping Giant */}
-              {report.sleepingGiant && (
+              <p style={{ color: "#c0705a", fontSize: 13, fontFamily: "'Plus Jakarta Sans',sans-serif", marginBottom: 8 }}>{error}</p>
+              {debugInfo && (
                 <>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Sleeping Giant</h3>
-                  <div className="card kot-anim">
-                    <p className="card-label">Highest-Leverage Opportunity</p>
-                    <p className="card-body">{report.sleepingGiant}</p>
-                  </div>
+                  <button className="btn-ghost" onClick={() => setDebugOpen(o => !o)} style={{ fontSize: 12, padding: "5px 12px" }}>
+                    {debugOpen ? "Hide" : "Show"} debug info
+                  </button>
+                  {debugOpen && <pre className="kot-debug-pre">{debugInfo}</pre>}
                 </>
               )}
-
-              {/* Website Mockup */}
-              {report.mockup && (
-                <>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Site, Rewritten</h3>
-                  <div className="kot-anim" style={{ marginBottom: 14 }}>
-                    <WebsiteMockup mockup={report.mockup} businessName={report.businessName} url={url} />
-                  </div>
-                </>
-              )}
-            </>
+            </div>
           )}
-
-          {/* About These Results */}
-          <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>About These Results</h3>
-          <div className="card kot-anim">
-            <p className="card-label">About These Results</p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 12 }}>
-              These results were generated using Monica Poling's proprietary Revenue Mapping framework, developed over 20+ years of helping businesses turn what they know into what they're known for.
-            </p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", margin: 0 }}>
-              Learn More: <a href="https://monicapoling.com/revenue-mapping/" target="_blank" rel="noopener noreferrer" style={{ color: "#be3650", textDecoration: "none", fontWeight: 500 }}>monicapoling.com/revenue-mapping</a>
-            </p>
-          </div>
-
-          {/* Print */}
-          <div className="card kot-anim no-print" style={{ marginTop: 14 }}>
-            <p className="card-label">Print This Page</p>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
-              Your report lives right here. Not in a database.<br />Print this page before you click away, or you'll lose your results.
-            </p>
-            <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
-          </div>
-
         </div>
-      )}
 
-      {/* ── FOOTER NEWSLETTER ── */}
-      <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />
-      <div className="no-print" style={{ background: "#1a1a18", padding: "2rem clamp(16px,4vw,2rem)" }}>
-        <div style={{ maxWidth: 860, margin: "0 auto", background: "#242422", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "1.5rem", display: "flex", gap: "1.25rem", alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.4rem" }}>Let's Make Some Noise</div>
-            <p style={{ fontSize: 12, color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>Turn what you know into what you're known for. Weekly ideas on using AI to organize, share, and monetize your expertise.</p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 220, flex: "0 0 260px" }}>
-            {!newsletterSubmitted ? (
-              <>
-                <input type="text" value={newsletterFirstName} onChange={(e) => setNewsletterFirstName(e.target.value)}
-                  placeholder="First name"
-                  style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "var(--font-body)", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
-                <input type="email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleNewsletterSubmit()}
-                  placeholder="your@email.com"
-                  style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "var(--font-body)", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
-                <button onClick={handleNewsletterSubmit} disabled={!newsletterEmail.trim()}
-                  style={{ background: "#861442", color: "#fff", border: "none", borderRadius: 10, padding: "10px 22px", fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, cursor: newsletterEmail.trim() ? "pointer" : "not-allowed", opacity: newsletterEmail.trim() ? 1 : 0.4, transition: "opacity .18s" }}>
-                  Subscribe Now
+        {/* ── REPORT ── */}
+        {report && (
+          <div className="kot-report-zone" style={{ animation: "fadeUp 0.5s ease both" }}>
+            <div className="page-footer-rule" style={{ margin: "0" }} />
+            <div className="kot-report-head kot-anim">
+              <h2 className="kot-report-name">{report.businessName}</h2>
+              <p className="kot-report-date">➜ {report.dateGenerated}</p>
+            </div>
+
+            {/* Debug (Monica only) */}
+            {isMonica && debugInfo && (
+              <div style={{ marginTop: 16 }}>
+                <button className="btn-ghost" style={{ fontSize: 11, padding: "6px 12px" }} onClick={() => setDebugOpen(!debugOpen)}>
+                  {debugOpen ? "Hide" : "Show"} Fetch Debug
                 </button>
-                <p style={{ fontSize: 11, color: "#5a5a56", lineHeight: 1.6, margin: 0 }}>By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.</p>
-              </>
-            ) : (
-              <p style={{ fontSize: 13, color: "#4caf8a", fontWeight: 400 }}>✓ You're in! Watch for Let's Make Some Noise.</p>
+                {debugOpen && <pre className="kot-debug-pre">{debugInfo}</pre>}
+              </div>
             )}
+
+            {/* Score */}
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your POWER Score</h3>
+            <div className="card kot-anim" style={{ animationDelay: "0.05s" }}>
+              <p className="card-label">Your POWER Score</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
+                <span className="kot-score-num">{sc}</span>
+                <span className="kot-score-den">/100</span>
+              </div>
+              <div style={{ background: "#f0ede8", borderRadius: 2, height: 3, overflow: "hidden" }}>
+                <div style={{ height: "100%", width: `${sc}%`, background: "#861442", borderRadius: 2, animation: "kot-bar 1.2s ease forwards" }} />
+              </div>
+            </div>
+
+            {/* About */}
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>About {report.businessName}</h3>
+            <div className="card kot-anim" style={{ animationDelay: "0.1s" }}>
+              <p className="card-label">About {report.businessName}</p>
+              <p className="card-body">{report.orgParagraph}</p>
+              {report.brandPersonality && (
+                <>
+                  <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
+                  <p className="card-label">Brand Personality</p>
+                  <p className="card-body">{report.brandPersonality}</p>
+                </>
+              )}
+              <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
+              <p className="card-label">About Your Score</p>
+              <p className="card-body">{report.scoreParagraph}</p>
+            </div>
+
+            {/* POWER Breakdown */}
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>P·O·W·E·R Score Breakdown</h3>
+            <div className="card kot-anim" style={{ animationDelay: "0.15s" }}>
+              <p className="card-label">P·O·W·E·R Score Breakdown</p>
+              {POWER_SECTIONS.map(({ key, letter, label, sub }) => {
+                const section = report[key];
+                if (!section) return null;
+                return (
+                  <div key={key} className="power-row">
+                    <div className="power-meta">
+                      <span className="power-title"><span className="power-letter">{letter}</span>— {label}: {sub}</span>
+                      <span className="power-score-val">{section.score}/20</span>
+                    </div>
+                    <ScoreBar score={section.score} max={20} />
+                    <p className="power-content">{section.content}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── EMAIL GATE ── */}
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Unlock Your Full Report</h3>
+
+            {!emailSubmitted ? (
+              <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
+                <p className="card-label">Unlock Your Full Report</p>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 16 }}>
+                  Drop your name and email to unlock the rest of your report:
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+                  {["Your Sleeping Giant opportunity", "Your site through a buyer's eyes — with rewrites"].map((item) => (
+                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
+                        <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8" }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 16 }}>
+                  <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="First name" className="kot-field" style={{ flex: 1, minWidth: 140 }} />
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
+                    placeholder="Email address" className="kot-field" style={{ flex: 2, minWidth: 200 }} />
+                </div>
+                {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
+                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", marginBottom: 12 }}>
+                  <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
+                    style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer" }} />
+                  Yes, add me to Let's Make Some Noise
+                </label>
+                <button className="btn-primary" onClick={handleEmailSubmit}
+                  disabled={emailSubmitting || !email.trim() || !firstName.trim()}
+                  style={{ marginBottom: 12 }}>
+                  {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
+                </button>
+                <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, color: "#5a5a56", lineHeight: 1.6 }}>
+                  By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.
+                </p>
+              </div>
+            ) : (
+              <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#4caf8a", marginBottom: 14 }}>
+                ✓ Report unlocked — your full intel is below.
+              </p>
+            )}
+
+            {/* ── BUCKET 2 ── */}
+            {emailSubmitted && (
+              <>
+                {report.sleepingGiant && (
+                  <>
+                    <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Sleeping Giant</h3>
+                    <div className="card kot-anim">
+                      <p className="card-label">Highest-Leverage Opportunity</p>
+                      <p className="card-body">{report.sleepingGiant}</p>
+                    </div>
+                  </>
+                )}
+                {report.mockup && (
+                  <>
+                    <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Site, Rewritten</h3>
+                    <div className="kot-anim" style={{ marginBottom: 14 }}>
+                      <WebsiteMockup mockup={report.mockup} businessName={report.businessName} url={url} />
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+
+            {/* About These Results */}
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>About These Results</h3>
+            <div className="card kot-anim">
+              <p className="card-label">About These Results</p>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 12 }}>
+                These results were generated using Monica Poling's proprietary Revenue Mapping framework, developed over 20+ years of helping businesses turn what they know into what they're known for.
+              </p>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", margin: 0 }}>
+                Learn More: <a href="https://monicapoling.com/revenue-mapping/" target="_blank" rel="noopener noreferrer" style={{ color: "#be3650", textDecoration: "none", fontWeight: 500 }}>monicapoling.com/revenue-mapping</a>
+              </p>
+            </div>
+
+            {/* Print */}
+            <div className="card kot-anim no-print" style={{ marginTop: 14 }}>
+              <p className="card-label">Print This Page</p>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
+                Your report lives right here. Not in a database.<br />Print this page before you click away, or you'll lose your results.
+              </p>
+              <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
+              {isMonica && report && (
+                <button className="btn-ghost" style={{ marginTop: 12 }}
+                  onClick={() => { console.log("POWER Score Report Data:", JSON.stringify(report, null, 2)); alert("Report data logged to console (F12 → Console)."); }}>
+                  Log Report Data →
+                </button>
+              )}
+            </div>
+
+          </div>
+        )}
+
+        {/* ── FOOTER ── */}
+        <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />
+
+        <div className="no-print" style={{ background: "#1a1a18", padding: "2rem clamp(16px,4vw,2rem)" }}>
+          <div style={{ background: "#242422", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "1.5rem", display: "flex", gap: "1.25rem", alignItems: "flex-start", flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 200 }}>
+              <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.4rem" }}>Let's Make Some Noise</div>
+              <p style={{ fontSize: 12, color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>Turn what you know into what you're known for. Weekly ideas on using AI to organize, share, and monetize your expertise.</p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, minWidth: 220, flex: "0 0 260px" }}>
+              {!newsletterSubmitted ? (
+                <>
+                  <input type="text" value={newsletterFirstName} onChange={(e) => setNewsletterFirstName(e.target.value)}
+                    placeholder="First name"
+                    style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
+                  <input type="email" value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleNewsletterSubmit()}
+                    placeholder="your@email.com"
+                    style={{ background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }} />
+                  <button onClick={handleNewsletterSubmit} disabled={!newsletterEmail.trim()}
+                    style={{ background: "#861442", color: "#fff", border: "none", borderRadius: 10, padding: "10px 22px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, fontWeight: 500, cursor: newsletterEmail.trim() ? "pointer" : "not-allowed", opacity: newsletterEmail.trim() ? 1 : 0.4, transition: "opacity .18s" }}>
+                    Subscribe Now
+                  </button>
+                  <p style={{ fontSize: 11, color: "#5a5a56", lineHeight: 1.6, margin: 0 }}>By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.</p>
+                </>
+              ) : (
+                <p style={{ fontSize: 13, color: "#4caf8a", fontWeight: 400 }}>✓ You're in! Watch for Let's Make Some Noise.</p>
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="page-footer-rule" />
+        <footer className="page-footer no-print">
+          <div>© 2026 POWER Score &nbsp;·&nbsp; Data on Tap &nbsp;·&nbsp; <a href="https://monicapoling.com/data-on-tap" target="_blank" rel="noopener noreferrer">monicapoling.com</a></div>
+        </footer>
+
       </div>
-
-      <div className="page-footer-rule" />
-      <footer className="page-footer no-print">
-        <div style={{ maxWidth: 860, margin: "0 auto" }}>
-          © 2026 POWER Score &nbsp;·&nbsp; Data on Tap &nbsp;·&nbsp; <a href="https://monicapoling.com/data-on-tap" target="_blank" rel="noopener noreferrer">monicapoling.com</a>
-        </div>
-      </footer>
-
     </div>
   );
 }
