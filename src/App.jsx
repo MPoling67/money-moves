@@ -454,7 +454,7 @@ export default function App() {
           <div className="kot-hero-left">
             <div className="kot-hero-logo">
               <div style={{ flexShrink: 0, lineHeight: 0 }}>
-                <svg width="36" height="36" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <svg width="52" height="52" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                   <rect width="64" height="64" fill="#111110" rx="8"/>
                   <g transform="translate(4, 6) scale(0.0373)">
                     <defs>
