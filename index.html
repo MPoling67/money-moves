@@ -1,67 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ── SEO ── -->
-  <title>Get Your POWER Score — Is Your Website Working as Hard as You Do? | Data on Tap</title>
-  <meta name="description" content="Share your URL and get your POWER Score ⚡ — a free competitive analysis across five dimensions: Prestige, Ownership, Wow &amp; Rep." />
-  <link rel="canonical" href="https://power.vercel.app" />
+    <!-- Primary Meta -->
+    <title>POWER Score — Free Competitive Analysis Mini-App | Data on Tap</title>
+    <meta name="description" content="How well does your website tell your story? ⚡ Get your free POWER Score — an AI-generated analysis across five categories. Results in seconds." />
+    <meta name="author" content="Data on Tap" />
+    <link rel="canonical" href="https://power-score.vercel.app/" />
 
-  <!-- ── Open Graph ── -->
-  <meta property="og:title" content="Get Your POWER Score — Free Business Positioning Mini-App" />
-  <meta property="og:description" content="Share your URL and get your POWER Score ⚡ — a free competitive analysis across five dimensions: Prestige, Ownership, Wow &amp; Rep." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://power.vercel.app" />
-  <meta property="og:image" content="https://power.vercel.app/power-score-social.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://power-score.vercel.app/" />
+    <meta property="og:title" content="POWER Score — Free Competitive Analysis Mini-App" />
+    <meta property="og:description" content="How well does your website tell your story? ⚡ Get your free AI-generated POWER Score — competitive analysis across five categories: Prestige, Ownership, Wow Factor, Expertise, and Reputation." />
+    <meta property="og:image" content="https://power-score.vercel.app/power-score-social.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Data on Tap" />
+    <meta property="og:locale" content="en_US" />
 
-  <!-- ── Pinterest ── -->
-  <meta name="p:domain_verify" content="9921e493445e449a3a36e7bf152b8a2e" />
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://power-score.vercel.app/" />
+    <meta name="twitter:title" content="POWER Score — Free Competitive Analysis Mini-App" />
+    <meta name="twitter:description" content="How well does your website tell your story? ⚡ Get your free AI-generated POWER Score — competitive analysis across five categories: Prestige, Ownership, Wow Factor, Expertise, and Reputation." />
+    <meta name="twitter:image" content="https://power-score.vercel.app/power-score-social.png" />
 
-  <!-- ── Fonts ── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- ── Favicon ── -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Pinterest domain verify -->
+    <meta name="p:domain_verify" content="9921e493445e449a3a36e7bf152b8a2e" />
 
-  <!-- ── GTM ── -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PC2BG949');</script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-PC2BG949');</script>
 
-  <!-- ── GA4 ── -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KP11HKDTE"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6KP11HKDTE');
-  </script>
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KP11HKDTE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6KP11HKDTE');
+    </script>
 
-  <!-- ── Hidden H1 for SEO ── -->
-  <style>
-    .seo-h1 {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
-</head>
-<body>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- GTM noscript -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC2BG949" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC2BG949" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <h1 class="seo-h1">POWER Score — Free Business Positioning Assessment | Data on Tap</h1>
-
-  <div id="root"></div>
-
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
