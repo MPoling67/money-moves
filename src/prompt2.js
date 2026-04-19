@@ -16,10 +16,10 @@ JSON Schema:
     { "title": "string", "insight": "1-2 sentences max. What the trend is and why it matters for THIS business specifically." }
   ],
 
-  "faqs": [
-    { "question": "string — a specific buying objection or money question: pricing, ROI, proof of results, qualifications, what they get, timeline, or why this over a competitor. NOT general curiosity questions."}
+"faqs": [
+  { "question": "...", "answered": true/false, "note": "..." }
   ],
-
+ 
   "competitors": [
     { "name": "string", "win": "1 sentence — the one thing they're doing better right now" }
   ],
