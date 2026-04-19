@@ -4,13 +4,13 @@ MEMORY IS FORBIDDEN. Here's why this matters: the model has training data on rea
 
 REQUIRED FETCH SEQUENCE — follow exactly:
 1. Use web_search to fetch the EXACT URL provided.
-   - 1a. Only follow subpage URLs that are discovered from links on the live homepage. Never follow URLs from Google search index results or cached pages.
+   1a. Only follow subpage URLs discovered from links on the live homepage. Never follow URLs from Google search index results or cached pages.
 2. Read the full returned content.
 3. If content is empty or an error, try in order:
    - Add or remove trailing slash
    - Add or remove "www."
    - Try the root domain if a subpage was given
-4. ONLY use content from URLs that return live, current content. If a URL returns a 404, redirect, or error — discard it entirely. Do not use Google search snippets or cached content from any URL.
+4. ONLY use content from URLs that return live current content. If a URL returns a 404, redirect, or error — discard it entirely. Do not use Google search snippets or cached content.
 5. Before writing a single word, extract at least 5 specific details from the live page: exact phrases, services listed, people named, CTAs used, page sections. If you can't find 5, the fetch failed.
 6. Build the entire report from those fetched details only. Every sentence must be grounded in what you read.
 
@@ -39,27 +39,10 @@ JSON Schema:
 
   "reputation": { "score": "0-20", "content": "2-3 sentences, 65 words max. Are others vouching for this business, or is it all self-reported? Look for: testimonials, press, partnerships, social proof — and whether it's specific or generic." },
 
-  "sleepingGiant": "2-3 sentences, 65 words max. The single highest-leverage opportunity hiding in plain sight on their site. Not generic advice — something specific to what you read. The thing they're closest to doing right that would move the needle most if they leaned into it.",
-
-  "mockup": {
-    "heroHeadline": "A rewritten hero headline for their site based on the POWER analysis — outcome-focused, specific, under 12 words.",
-    "heroSub": "A rewritten hero subheadline, 20-30 words. Answers the buyer question their current site doesn't.",
-    "heroCta": "A rewritten CTA button label, 3-6 words.",
-    "currentHeroNote": "One sentence: what their current hero says and why it's costing them.",
-    "originStory": "A 2-sentence founder/origin statement written as if for their About section. Specific to what you read.",
-    "originNote": "One sentence: where the origin story currently lives (or doesn't) and what that costs them.",
-    "proofPoints": [
-      { "label": "string", "text": "string", "missing": true, "missingNote": "string" }
-    ],
-    "gapLine": "One sharp sentence summarizing the single biggest gap between what the site says and what buyers need to hear."
-  },
-
   "urlsAttempted": ["https://example.com"],
   "fetchSuccess": true,
   "fetchNote": "Optional — only if fetch issues or sparse content."
 }
 
 overallScore = sum of five scores (each /20, total /100).
-90-100: Category Leader | 75-89: Strong Foundation, Underloaded Story | 60-74: Solid Presence, Clear Gaps | 45-59: Underdeveloped Positioning | Below 45: Significant Opportunity
-
-For mockup.proofPoints: return exactly 4 items using whatever proof signals exist. Set missing:true if the signal exists but is buried or absent from the homepage. Include missingNote only when missing:true.`;
+90-100: Category Leader | 75-89: Strong Foundation, Underloaded Story | 60-74: Solid Presence, Clear Gaps | 45-59: Underdeveloped Positioning | Below 45: Significant Opportunity`;
