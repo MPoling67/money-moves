@@ -363,12 +363,12 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .kot-section-header { background: #1a1a18; padding: 0.75rem clamp(16px,4vw,2rem) 0.5rem; }
+        .kot-section-header { background: #1a1a18; padding: 1.25rem clamp(16px,4vw,2rem) 0.75rem; }
         .kot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
         .kot-section-header h2 .power-word { font-weight: 600; color: #f0ede8; }
         .kot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
 
-        .kot-input-zone { background: #1a1a18; padding: 0.75rem clamp(16px,4vw,2rem) 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .kot-input-zone { background: #1a1a18; padding: 1rem clamp(16px,4vw,2rem) 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
         .kot-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .kot-input-field { flex: 1; min-width: 200px; padding: 10px 14px; background: #111110; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8; -webkit-text-fill-color: #f0ede8; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
         .kot-input-field:focus { border-color: #861442; }
@@ -465,7 +465,7 @@ export default function App() {
             </div>
             <div className="kot-hero-sub" style={{ lineHeight: 1.4 }}>
               <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website working as hard as you do?</p>
-              <p>Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the bragging points you might be overlooking.</p>
+              <p>Your website should make people want to work with you — not just tell them what you do. The POWER Score is an AI-generated competitive analysis — a deep dive into your website to help you identify the money moves you might be overlooking.</p>
             </div>
           </div>
           <div className="kot-hero-right">
@@ -586,10 +586,10 @@ export default function App() {
               <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
                 <p className="card-label">Money Moves</p>
                 <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 16 }}>
-                  Drop your name and email to see how to deploy these suggestions on your home page:
+                  Drop your name and email to get more intel:
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-                  {["Your Sleeping Giant opportunity", "Your site through a buyer's eyes — with rewrites"].map((item) => (
+                  {["Your Sleeping Giant (overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
@@ -607,10 +607,11 @@ export default function App() {
                     placeholder="Email address" className="kot-field" style={{ flex: 2, minWidth: 200 }} />
                 </div>
                 {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
+
                 <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", marginBottom: 12 }}>
                   <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
                     style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer" }} />
-                  Yes, add me to Let's Make Some Noise
+                  Yes, subscribe me to Let's Make Some Noise
                 </label>
                 <button className="btn-primary" onClick={handleEmailSubmit}
                   disabled={emailSubmitting || !email.trim() || !firstName.trim()}
@@ -618,7 +619,7 @@ export default function App() {
                   {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
                 </button>
                 <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 11, color: "#5a5a56", lineHeight: 1.6 }}>
-                  By submitting, you understand you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.
+                  You'll be subscribed to the Let's Make Some Noise newsletter. You can unsubscribe any time.
                 </p>
               </div>
             ) : (
