@@ -389,16 +389,17 @@ export default function App() {
         @keyframes fadeUp { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
         .kot-anim { animation: fadeUp 0.5s ease both; }
 
-        .kot-hero { width:100%; background:#111110; display:flex; align-items:stretch; min-height:220px; max-height:280px; }
-        .kot-hero-left { flex:3; padding:2rem clamp(16px,4vw,2rem); display:flex; flex-direction:column; justify-content:center; gap:14px; }
-        .kot-hero-logo { display:flex; align-items:center; gap:14px; }
+        .kot-hero { width:100%; background:#111110; display:flex; align-items:stretch; min-height:280px; border-bottom:1px solid rgba(255,255,255,0.06); }
+        .kot-hero-left { flex:1; padding:2.5rem clamp(16px,4vw,2.5rem); display:flex; flex-direction:column; justify-content:center; gap:14px; }
+        .kot-hero-logo { display:flex; align-items:center; gap:12px; }
         .kot-hero-title { font-family:var(--font-display); font-size:clamp(36px,6vw,52px); color:#f0ede8; line-height:1; letter-spacing:-0.02em; }
         .kot-hero-title strong { font-weight:600; color:#f0ede8; }
         .kot-hero-title em { font-weight:300; font-style:italic; color:#be3650; }
-        .kot-hero-sub { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.5; color:var(--muted); max-width:520px; }
-        .kot-hero-right { flex:0 0 230px; min-width:200px; max-width:230px; position:relative; overflow:hidden; background:#1a1a18; }
+        .kot-hero-lead { font-family:var(--font-body); font-size:15px; font-weight:500; line-height:1.5; color:#f0ede8; max-width:540px; margin:0; }
+        .kot-hero-body { font-family:var(--font-body); font-size:14px; font-weight:300; line-height:1.65; color:var(--muted); max-width:540px; margin:0; }
+        .kot-hero-right { flex:0 0 260px; min-width:220px; max-width:260px; overflow:hidden; align-self:stretch; }
         .kot-hero-right img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
-        @media (max-width:500px) { .kot-hero-right { display:none; } }
+        @media (max-width:600px) { .kot-hero-right { display:none; } }
 
         .kot-dim-bar { background:#111110; display:flex; align-items:center; border-bottom:1px solid rgba(255,255,255,0.06); }
         .kot-dim-col { flex:1; text-align:center; padding:10px 4px; font-family:var(--font-body); font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#f0ede8; }
@@ -466,15 +467,13 @@ export default function App() {
               <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
               <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
             </svg>
-            <span style={{ fontSize: 11, fontWeight: 400, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)" }}>Knowledge on Tap</span>
+            <span className="kot-hero-label">Knowledge on Tap</span>
           </div>
           <div className="kot-hero-title">
             <strong>POWER</strong> <em>Score</em>
           </div>
-          <p className="kot-hero-sub">
-            Find out how distinctly your business is positioned to stand out and win.<br />
-            Enter your URL. No email required.
-          </p>
+          <p className="kot-hero-lead">Find out how distinctly your business is positioned to stand out and win.</p>
+          <p className="kot-hero-body">Enter your URL and get your free POWER Score in seconds. No email required.</p>
         </div>
         <div className="kot-hero-right">
           <img src="/power-score-hero.png" alt="POWER Score" />
