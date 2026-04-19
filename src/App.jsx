@@ -380,12 +380,12 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .kot-section-header { background: #1a1a18; padding: 1.75rem clamp(16px,4vw,2rem) 0.75rem; }
+        .kot-section-header { background: #1a1a18; padding: 0.75rem clamp(16px,4vw,2rem) 0.5rem; }
         .kot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
         .kot-section-header h2 .power-word { font-weight: 600; color: #f0ede8; }
         .kot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
 
-        .kot-input-zone { background: #1a1a18; padding: 1rem clamp(16px,4vw,2rem) 1.75rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .kot-input-zone { background: #1a1a18; padding: 0.75rem clamp(16px,4vw,2rem) 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
         .kot-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .kot-input-field { flex: 1; min-width: 200px; padding: 10px 14px; background: #111110; border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius); color: #f0ede8; -webkit-text-fill-color: #f0ede8; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
         .kot-input-field:focus { border-color: #861442; }
@@ -490,8 +490,6 @@ export default function App() {
           </div>
         </div>
 
-        <div className="page-footer-rule no-print" />
-
         <div className="kot-dim-bar no-print">
           <div className="kot-dim-col">Prestige</div>
           <div className="kot-dim-pipe" />
@@ -503,8 +501,6 @@ export default function App() {
           <div className="kot-dim-pipe" />
           <div className="kot-dim-col">Reputation</div>
         </div>
-
-        <div className="page-footer-rule no-print" />
 
         <div className="kot-section-header no-print">
           <h2><span style={{ color: "#be3650" }}>Get Your</span> <span className="power-word">POWER</span> <span className="score-word">Score</span></h2>
@@ -605,7 +601,7 @@ export default function App() {
 
             {!emailSubmitted ? (
               <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
-                <p className="card-label">Want a Demo Website?</p>
+                <p className="card-label">Money Moves</p>
                 <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 16 }}>
                   Drop your name and email to see how to deploy these suggestions on your home page:
                 </p>
@@ -664,8 +660,6 @@ export default function App() {
                 )}
                 {revenue && (
                   <div className="card kot-anim">
-                    <p className="card-label">Money Moves</p>
-
                     {/* Services */}
                     {revenue.services?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
@@ -765,7 +759,8 @@ export default function App() {
 
 
             {/* Print */}
-            <div className="card kot-anim no-print" style={{ marginTop: 14 }}>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Print This Page</h3>
+            <div className="card kot-anim no-print" style={{ marginTop: 0 }}>
               <p className="card-label">Print This Page</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
                 Your report lives right here. Not in a database.<br />Print this page before you click away, or you'll lose your results.
