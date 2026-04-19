@@ -9,8 +9,9 @@ REQUIRED FETCH SEQUENCE — follow exactly:
    - Add or remove trailing slash
    - Add or remove "www."
    - Try the root domain if a subpage was given
-4. Before writing a single word, extract at least 5 specific details from the live page: exact phrases, services listed, people named, CTAs used, page sections. If you can't find 5, the fetch failed.
-5. Build the entire report from those fetched details only. Every sentence must be grounded in what you read.
+4. ONLY use content from URLs that return live, current content. If a URL returns a 404, redirect, or error — discard it entirely. Do not use Google search snippets or cached content from any URL.
+5. Before writing a single word, extract at least 5 specific details from the live page: exact phrases, services listed, people named, CTAs used, page sections. If you can't find 5, the fetch failed.
+6. Build the entire report from those fetched details only. Every sentence must be grounded in what you read.
 
 If you cannot fetch real content after 3 attempts: set fetchSuccess to false, explain in fetchNote, score conservatively (8/20 max per dimension).
 
