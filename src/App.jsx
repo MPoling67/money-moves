@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { POWER_SYSTEM_PROMPT } from './prompt.js';
+import { REVENUE_SYSTEM_PROMPT } from './prompt2.js';
 
 // ── LOGGER ────────────────────────────────────────────────────────────────────
 const LOGGER = "https://script.google.com/macros/s/AKfycbwvztxaVKSDYhevhsjQ7LowAMvjBu4ONs2AqXytbNflmEJ_mfBF7mI54fgyhBZzhU8M/exec";
@@ -54,6 +55,33 @@ WARNING: The URL being analyzed is ${url}. You have NO prior knowledge of this b
 
 Record every URL attempted in urlsAttempted. If you truly cannot fetch content after all attempts, set fetchSuccess to false, explain in fetchNote, and score conservatively (8/20 max per dimension). Return the full JSON.`
   }]);
+}
+
+async function generateRevenue(powerData) {
+  const body = {
+    model: "claude-sonnet-4-6",
+    max_tokens: 2000,
+    system: REVENUE_SYSTEM_PROMPT,
+    messages: [{
+      role: "user",
+      content: `Here is the POWER Score data for this business:\n\n${JSON.stringify(powerData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
+    }]
+  };
+  const r = await fetch("/api/anthropic", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error(`API error ${r.status}`);
+  const data = await r.json();
+  const textBlocks = data.content?.filter((b) => b.type === "text") || [];
+  if (!textBlocks.length) throw new Error("No text block in response.");
+  const tb = textBlocks[textBlocks.length - 1];
+  const stripped = tb.text.replace(/\`\`\`json|\`\`\`/g, "").replace(/<[^>]*cite[^>]*>/gi, "").trim();
+  const start = stripped.indexOf("{");
+  const end = stripped.lastIndexOf("}");
+  if (start === -1 || end === -1) throw new Error("No JSON found.");
+  return JSON.parse(stripped.slice(start, end + 1));
 }
 
 // ── CONSTANTS ─────────────────────────────────────────────────────────────────
@@ -229,6 +257,10 @@ export default function App() {
   const [newsletterFirstName, setNewsletterFirstName] = useState("");
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
 
+  const [revenue, setRevenue] = useState(null);
+  const [revenueLoading, setRevenueLoading] = useState(false);
+  const [revenueError, setRevenueError] = useState(null);
+
   const isMonica = new URLSearchParams(window.location.search).has("monica");
   const sc = report?.overallScore || 0;
 
@@ -283,6 +315,11 @@ export default function App() {
         body: JSON.stringify({ timestamp: humanTime, event: "email_submit", app: "PWR Score", url: url.trim(), score: report?.overallScore || "", firstName: firstName.trim(), email: email.trim(), subscribe: emailSubscribe ? "yes" : "no" }),
       });
       setEmailSubmitted(true);
+      // Fire Call 2
+      setRevenueLoading(true);
+      generateRevenue(report)
+        .then(result => { setRevenue(result); setRevenueLoading(false); })
+        .catch(() => { setRevenueError("Could not load revenue mapping."); setRevenueLoading(false); });
     } catch {
       setEmailError("Something went wrong. Please try again.");
     } finally {
@@ -613,25 +650,116 @@ export default function App() {
               </p>
             )}
 
-            {/* ── BUCKET 2 ── */}
+            {/* ── BUCKET 2 — REVENUE MAPPING ── */}
             {emailSubmitted && (
               <>
-                {report.sleepingGiant && (
-                  <>
-                    <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Sleeping Giant</h3>
-                    <div className="card kot-anim">
-                      <p className="card-label">Highest-Leverage Opportunity</p>
-                      <p className="card-body">{report.sleepingGiant}</p>
-                    </div>
-                  </>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Revenue Mapping</h3>
+                {revenueLoading && (
+                  <div className="card kot-anim">
+                    <PulseLoader text="Building your revenue map..." />
+                  </div>
                 )}
-                {report.mockup && (
-                  <>
-                    <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your Site, Rewritten</h3>
-                    <div className="kot-anim" style={{ marginBottom: 14 }}>
-                      <WebsiteMockup mockup={report.mockup} businessName={report.businessName} url={url} />
-                    </div>
-                  </>
+                {revenueError && (
+                  <div className="card kot-anim">
+                    <p style={{ color: "#c0705a", fontSize: 13 }}>{revenueError}</p>
+                  </div>
+                )}
+                {revenue && (
+                  <div className="card kot-anim">
+                    <p className="card-label">Are you leaving money on the table?</p>
+
+                    {/* Services */}
+                    {revenue.services?.length > 0 && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>Your Services</p>
+                        {revenue.services.map((s, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{s.name}</strong> — {s.note}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Sleeping Giant */}
+                    {revenue.sleepingGiant && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🎯 Sleeping Giant</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.7, color: "#f0ede8", margin: 0 }}>{revenue.sleepingGiant}</p>
+                      </div>
+                    )}
+
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Trends */}
+                    {revenue.trends?.length > 0 && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
+                        {revenue.trends.map((t, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Customer FAQ */}
+                    {revenue.faqs?.length > 0 && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>❓ Customer FAQ</p>
+                        {revenue.faqs.map((f, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <div>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{f.question}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
+                                <span style={{ color: f.answered ? "#4caf8a" : "#c0705a", fontWeight: 500 }}>{f.answered ? "✓ Answered" : "✗ Not answered"}</span> — {f.note}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Competitors */}
+                    {revenue.competitors?.length > 0 && (
+                      <div style={{ marginBottom: 20 }}>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🏁 Competitors</p>
+                        {revenue.competitors.map((c, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{c.name}</strong> — {c.win}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+
+                    {/* Revenue Moves */}
+                    {revenue.revenueMoves?.length > 0 && (
+                      <div>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>💰 Revenue Moves</p>
+                        {revenue.revenueMoves.map((m, i) => (
+                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                            <div>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{m.move}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>{m.why}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                  </div>
                 )}
               </>
             )}
