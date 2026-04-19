@@ -19,8 +19,8 @@ export default async function handler(req, res) {
 
     // Only trigger scrape enrichment for the Phase 1 call.
     // Phase 2 calls contain URLs inside JSON but should pass through untouched.
-    const isPhase1Call = userMessage.trim().startsWith('Generate a Prestige Score Report');
-
+    const isPhase1Call = userMessage.trim().startsWith('You MUST use the web_search tool');
+    
     let bodyToSend = req.body;
 
     if (isPhase1Call) {
