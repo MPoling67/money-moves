@@ -4,6 +4,7 @@ MEMORY IS FORBIDDEN. Here's why this matters: the model has training data on rea
 
 REQUIRED FETCH SEQUENCE — follow exactly:
 1. Use web_search to fetch the EXACT URL provided.
+   - 1a. Only follow subpage URLs that are discovered from links on the live homepage. Never follow URLs from Google search index results or cached pages.
 2. Read the full returned content.
 3. If content is empty or an error, try in order:
    - Add or remove trailing slash
