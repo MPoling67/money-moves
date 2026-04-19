@@ -597,7 +597,7 @@ export default function App() {
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want Your Money Moves?</h3>
 
             {!emailSubmitted ? (
-              <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1e1c1b", border: "1px solid rgba(134,20,66,0.35)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
+              <div className="kot-anim no-print" style={{ animationDelay: "0.35s", background: "#1a1a18", border: "1.5px solid rgba(134,20,66,0.5)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
                 <p className="card-label">Money Moves</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
                   {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
@@ -606,11 +606,11 @@ export default function App() {
                         <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
                         <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8" }}>{item}</span>
+                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 15, fontWeight: 400, color: "#f0ede8" }}>{item}</span>
                     </div>
                   ))}
                 </div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", margin: "0 0 10px" }}>Subscribe Now</p>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", margin: "0 0 10px" }}>Yes, Show Me the Money Moves</p>
                 <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
                   <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
                     placeholder="First name" className="kot-field" style={{ flex: 1, minWidth: 140 }} />
@@ -621,10 +621,10 @@ export default function App() {
                 {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
                 <button className="btn-primary" onClick={handleEmailSubmit}
                   disabled={emailSubmitting || !email.trim() || !firstName.trim()}
-                  style={{ marginBottom: 12 }}>
+                  style={{ marginBottom: 12, width: "100%" }}>
                   {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
                 </button>
-                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#5a5a56", lineHeight: 1.6 }}>
+                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
                   <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
                     style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
                   I understand that by requesting this intel, I'll be subscribed to Let's Make Some Noise. I can unsubscribe any time.
@@ -652,14 +652,17 @@ export default function App() {
                 )}
                 {revenue && (
                   <div className="card kot-anim">
+
                     {/* Services */}
                     {revenue.services?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🛠️ Your Services</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>🛠️ Your Services</p>
                         {revenue.services.map((s, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{s.name}</strong> — {s.note}</p>
+                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
+                              <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{s.name}</strong> — {s.note}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -670,8 +673,8 @@ export default function App() {
                     {/* Sleeping Giant */}
                     {revenue.sleepingGiant && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🎯 Sleeping Giant</p>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 300, lineHeight: 1.7, color: "#f0ede8", margin: 0 }}>{revenue.sleepingGiant}</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>🎯 Sleeping Giant</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>{revenue.sleepingGiant}</p>
                       </div>
                     )}
 
@@ -680,46 +683,50 @@ export default function App() {
                     {/* Customer FAQ */}
                     {revenue.faqs?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>❓ Customer FAQ</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>❓ Customer FAQ</p>
                         {revenue.faqs.map((f, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
                             <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{f.question}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
-                                <span style={{ color: f.answered ? "#4caf8a" : "#c0705a", fontWeight: 500 }}>{f.answered ? "✓ Answered" : "✗ Not answered"}</span> — {f.note}
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 500, color: "#f0ede8", margin: "0 0 4px", lineHeight: 1.5 }}>{f.question}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: "#be3650", margin: 0 }}>
+                                <strong style={{ fontWeight: 500 }}>{f.answered ? "✓ Answered" : "✗ Not answered"}</strong> — {f.note}
                               </p>
                             </div>
                           </div>
                         ))}
                       </div>
                     )}
+
                     <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
                     {/* Trends */}
                     {revenue.trends?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>📈 Industry Trends</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>📈 Industry Trends</p>
                         {revenue.trends.map((t, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{t.title}</strong> — {t.insight}</p>
+                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
+                              <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{t.title}</strong> — {t.insight}
+                            </p>
                           </div>
                         ))}
                       </div>
                     )}
-
 
                     <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
                     {/* Competitors */}
                     {revenue.competitors?.length > 0 && (
                       <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>🏁 Competitors</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>🏁 Competitors</p>
                         {revenue.competitors.map((c, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "#f0ede8", margin: 0 }}><strong style={{ fontWeight: 500 }}>{c.name}</strong> — {c.win}</p>
+                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
+                              <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{c.name}</strong> — {c.win}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -730,13 +737,13 @@ export default function App() {
                     {/* Revenue Moves */}
                     {revenue.revenueMoves?.length > 0 && (
                       <div>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 8 }}>💰 Revenue Moves</p>
+                        <p style={{ fontFamily: "var(--font-body)", fontSize: 12, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#f0ede8", marginBottom: 10 }}>💰 Revenue Moves</p>
                         {revenue.revenueMoves.map((m, i) => (
-                          <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                            <span style={{ color: "#be3650", flexShrink: 0 }}>→</span>
+                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
                             <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#f0ede8", margin: "0 0 2px" }}>{m.move}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 300, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>{m.why}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 500, color: "#f0ede8", margin: "0 0 4px", lineHeight: 1.5 }}>{m.move}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>{m.why}</p>
                             </div>
                           </div>
                         ))}
