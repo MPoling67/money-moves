@@ -17,7 +17,7 @@ JSON Schema:
   ],
 
   "faqs": [
-    { "question": "string — a real question a buyer would type or ask", "answered": true/false, "note": "1 sentence — does their site answer this or not, and what's the cost either way" }
+    { "question": "string — a specific buying objection or money question: pricing, ROI, proof of results, qualifications, what they get, timeline, or why this over a competitor. NOT general curiosity questions."}
   ],
 
   "competitors": [
