@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { POWER_SYSTEM_PROMPT } from './prompt.js';
-import SubscribeBar from './components/SubscribeBar.jsx';
 import { REVENUE_SYSTEM_PROMPT } from './prompt2.js';
 
 // ── LOGGER ────────────────────────────────────────────────────────────────────
@@ -103,7 +102,7 @@ function PulseLoader({ text }) {
 function ScoreBar({ score, max }) {
   const pct = Math.round((Math.min(score, max) / max) * 100);
   return (
-    <div style={{ background: "#2e2e2b", borderRadius: 2, height: 3, overflow: "hidden" }}>
+    <div style={{ background: "#4a4a46", borderRadius: 2, height: 3, overflow: "hidden" }}>
       <div style={{ height: "100%", width: `${pct}%`, background: "#861442", borderRadius: 2, animation: "dot-bar 1.2s ease forwards" }} />
     </div>
   );
@@ -272,10 +271,10 @@ export default function App() {
         .power-row:first-child { padding-top: 0; }
         .power-row:last-child { border-bottom: none; padding-bottom: 0; }
         .power-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-        .power-title { font-family: var(--font-body); font-size: 12px; font-weight: 500; color: #f0ede8; }
+        .power-title { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: #f0ede8; }
         .power-letter { color: #be3650; margin-right: 4px; }
         .power-score-val { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); white-space: nowrap; }
-        .power-content { font-family: var(--font-body); font-size: 13px; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.7); margin-top: 10px; }
+        .power-content { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; margin-top: 10px; }
 
         .dot-field { width: 100%; padding: 10px 14px; background: #111110 !important; border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); color: #f0ede8 !important; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-text-fill-color: #f0ede8 !important; caret-color: #f0ede8; }
         .dot-field:focus { border-color: #861442; background: #111110 !important; }
@@ -287,7 +286,7 @@ export default function App() {
         .dot-debug-pre { padding: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 12px; white-space: pre-wrap; word-break: break-word; line-height: 1.6; font-family: var(--font-body); margin-top: 8px; }
 
         .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 12px; font-weight: 300; color: #f0ede8; text-align: center; line-height: 20px; }
-        .page-footer a { color: #861442; text-decoration: none; }
+        .page-footer a { color: #861442; text-decoration: none; font-weight: 500; }
         .page-footer a:hover { color: #be3650; }
 
         @media print {
@@ -419,7 +418,7 @@ export default function App() {
                 <span className="dot-score-num">{sc}</span>
                 <span className="dot-score-den">/100</span>
               </div>
-              <div style={{ background: "#2e2e2b", borderRadius: 2, height: 3, overflow: "hidden" }}>
+              <div style={{ background: "#4a4a46", borderRadius: 2, height: 3, overflow: "hidden" }}>
                 <div style={{ height: "100%", width: `${sc}%`, background: "#861442", borderRadius: 2, animation: "dot-bar 1.2s ease forwards" }} />
               </div>
             </div>
@@ -455,39 +454,46 @@ export default function App() {
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want Your Money Moves?</h3>
 
             {!emailSubmitted ? (
-              <div className="dot-anim no-print" style={{ animationDelay: "0.35s", background: "#1a1a18", border: "1.5px solid rgba(134,20,66,0.5)", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
-                <p className="card-label">Money Moves</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-                  {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
-                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
-                        <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 15, fontWeight: 400, color: "#f0ede8" }}>{item}</span>
-                    </div>
-                  ))}
+              <>
+                {/* Box 1 — teaser */}
+                <div className="card dot-anim" style={{ animationDelay: "0.3s", marginBottom: 12 }}>
+                  <p className="card-label">Get Your Money Moves</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
+                      <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
+                          <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8", lineHeight: 1.8 }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", margin: "0 0 10px" }}>Yes, Show Me the Money Moves</p>
-                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
-                  <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="First name" className="dot-field" style={{ flex: 1, minWidth: 140 }} />
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
-                    placeholder="Email address" className="dot-field" style={{ flex: 2, minWidth: 200 }} />
+
+                {/* Box 2 — CTA, crimson */}
+                <div className="dot-anim no-print" style={{ animationDelay: "0.4s", background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
+                  <p className="card-label" style={{ color: "#861442" }}>Yes! Show Me the Money Moves</p>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
+                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="First name" className="dot-field" style={{ flex: 1, minWidth: 140 }} />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
+                      placeholder="Email address" className="dot-field" style={{ flex: 2, minWidth: 200 }} />
+                  </div>
+                  {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
+                  <button className="btn-primary" onClick={handleEmailSubmit}
+                    disabled={emailSubmitting || !email.trim() || !firstName.trim()}
+                    style={{ marginBottom: 12, width: "100%" }}>
+                    {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
+                  </button>
+                  <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
+                    <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
+                      style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
+                    I understand I'll be subscribed to Let's Make Some Noise with weekly AI tips. I can unsubscribe any time.
+                  </label>
                 </div>
-                {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
-                <button className="btn-primary" onClick={handleEmailSubmit}
-                  disabled={emailSubmitting || !email.trim() || !firstName.trim()}
-                  style={{ marginBottom: 12, width: "100%" }}>
-                  {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
-                </button>
-                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
-                  <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
-                    style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
-                  I understand that by requesting this intel, I'll be subscribed to Let's Make Some Noise. I can unsubscribe any time.
-                </label>
-              </div>
+              </>
             ) : (
               <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#4caf8a", marginBottom: 14 }}>
                 ✓ Report unlocked — your full intel is below.
@@ -633,10 +639,6 @@ export default function App() {
         )}
 
         {/* ── FOOTER ── */}
-        {report && <div className="page-footer-rule" style={{ margin: "2rem 0 0" }} />}
-
-        {report && <SubscribeBar appName="PWR Score" url={url} score={report?.overallScore || ""} />}
-
         <div className="page-footer-rule" />
         <footer className="page-footer no-print">
           <div>© 2026 POWER Score &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
