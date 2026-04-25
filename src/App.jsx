@@ -65,7 +65,7 @@ async function generateRevenue(powerData) {
     system: REVENUE_SYSTEM_PROMPT,
     messages: [{
       role: "user",
-      content: `Here is the POWER Score data for this business:\n\n${JSON.stringify(powerData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
+      content: `Here is the POWER Score data for your  business:\n\n${JSON.stringify(powerData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
     }]
   };
   const r = await fetch("/api/anthropic", {
