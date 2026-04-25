@@ -339,8 +339,8 @@ export default function App() {
               <div className="dot-hero-title"><strong>POWER</strong> <em>Score</em></div>
             </div>
             <div className="dot-hero-sub">
-              <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website working as hard as you do?</p>
-              <p>Most business websites describe what you do. The best ones make people reach for their wallet. The POWER Score is a free AI-generated competitive analysis across five categories, plus bonus missed opportunities and money moves. Learn exactly where your site is leaving money on the table — and what to do about it.</p>
+              <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website leaving money on the table?</p>
+              <p>Get your POWER Score, a free AI-generated website analysis that shows you exactly where you're underselling what you do — and how to fix it.</p>
             </div>
           </div>
           <div className="dot-hero-right">
