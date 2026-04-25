@@ -238,8 +238,8 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .dot-section-header { background: #1a1a18; padding: 1.25rem clamp(16px,4vw,2rem) 0; }
-        .dot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
+        .dot-section-header { background: #1a1a18; padding: 2.5rem clamp(16px,4vw,2rem) 2.5rem; }
+        .dot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; text-align: left; }
         .dot-section-header h2 .power-word { font-weight: 700; color: #f0ede8; }
         .dot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
 
@@ -286,8 +286,8 @@ export default function App() {
 
         .dot-debug-pre { padding: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 12px; white-space: pre-wrap; word-break: break-word; line-height: 1.6; font-family: var(--font-body); margin-top: 8px; }
 
-        .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6); text-align: left; line-height: 20px; }
-        .page-footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
+        .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 12px; font-weight: 300; color: #f0ede8; text-align: center; line-height: 20px; }
+        .page-footer a { color: #861442; text-decoration: none; }
         .page-footer a:hover { color: #be3650; }
 
         @media print {
@@ -329,12 +329,7 @@ export default function App() {
           <div className="dot-hero-left">
             <div className="dot-hero-logo">
               <div style={{ flexShrink: 0, lineHeight: 0 }}>
-                <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
-                  <rect x="0"  y="0"  width="24" height="24" fill="#861442"/>
-                  <rect x="30" y="0"  width="24" height="24" fill="#ffffff" opacity="0.6"/>
-                  <rect x="0"  y="30" width="24" height="24" fill="#ffffff" opacity="0.25"/>
-                  <rect x="30" y="30" width="24" height="24" fill="#861442" opacity="0.25"/>
-                </svg>
+                <img src="/favicon.png" alt="POWER Score" width="54" height="54" style={{ display: "block" }} />
               </div>
               <div className="dot-hero-title"><strong>POWER</strong> <em>Score</em></div>
             </div>
@@ -644,7 +639,7 @@ export default function App() {
 
         <div className="page-footer-rule" />
         <footer className="page-footer no-print">
-          <div>© 2026 POWER Score &nbsp;·&nbsp; Data on Tap &nbsp;·&nbsp; <a href="https://monicapoling.com/data-on-tap" target="_blank" rel="noopener noreferrer">monicapoling.com/data-on-tap</a></div>
+          <div>© 2026 POWER Score &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
         </footer>
 
       </div>
