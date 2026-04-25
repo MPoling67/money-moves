@@ -471,9 +471,10 @@ export default function App() {
                   </div>
                 </div>
 
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 700, color: "#861442", margin: "0 0 0.75rem", letterSpacing: "-0.01em" }}>Yes! Show Me the Money Moves</h3>
+
                 {/* Box 2 — CTA, crimson */}
                 <div className="dot-anim no-print" style={{ animationDelay: "0.4s", background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
-                  <p style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, letterSpacing: "-0.01em", color: "#861442", margin: "0 0 16px" }}>Yes! Show Me the Money Moves</p>
                   <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
                     <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
                       placeholder="First name" className="dot-field" style={{ flex: 1, minWidth: 140 }} />
@@ -622,9 +623,9 @@ export default function App() {
             {/* Coaching CTA */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Ready to Close the Gap?</h3>
             <div className="card dot-anim" style={{ background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442" }}>
-              <p className="card-label" style={{ color: "#861442" }}>Revenue Coaching</p>
+              <p className="card-label" style={{ color: "#861442" }}>Work with Monica</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
-                Ready to build your money moves? Strategic growth planning for business owners who are done leaving money on the table. We'll map your revenue strategy and find where to use AI to close the gaps.
+                <strong style={{ fontWeight: 500 }}>Ready to build your money moves?</strong> Strategic growth planning for business owners who are done leaving money on the table. We'll map your revenue strategy and find where to use AI to close the gaps.
               </p>
               <a href="https://monicapoling.com/work-with-monica" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: "inline-block", textDecoration: "none" }}>Work with Monica →</a>
             </div>
