@@ -238,7 +238,7 @@ export default function App() {
 
         .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
 
-        .dot-section-header { background: #1a1a18; padding: 0 clamp(16px,4vw,2rem) 0; }
+        .dot-section-header { background: #1a1a18; padding: 1.25rem clamp(16px,4vw,2rem) 0; }
         .dot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; }
         .dot-section-header h2 .power-word { font-weight: 700; color: #f0ede8; }
         .dot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
@@ -286,7 +286,7 @@ export default function App() {
 
         .dot-debug-pre { padding: 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--muted); font-size: 12px; white-space: pre-wrap; word-break: break-word; line-height: 1.6; font-family: var(--font-body); margin-top: 8px; }
 
-        .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.25); text-align: left; line-height: 1.8; }
+        .page-footer { background: #111110; padding: 1.25rem clamp(16px,4vw,2rem); font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6); text-align: left; line-height: 20px; }
         .page-footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
         .page-footer a:hover { color: #be3650; }
 
