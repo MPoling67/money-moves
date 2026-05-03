@@ -1,7 +1,8 @@
 import { useState } from "react";
+import HeroBanner from './HeroBanner.jsx';
 
-import { MONEY_MOVES_SYSTEM_PROMPT } from './prompt.js';
-import { REVENUE_SYSTEM_PROMPT } from './prompt2.js';
+import { MONEY_MOVES_SYSTEM_PROMPT } from './prompts.js';
+import { REVENUE_SYSTEM_PROMPT } from './prompts.js';
 
 // ── LOGGER ────────────────────────────────────────────────────────────────────
 const LOGGER = "https://script.google.com/macros/s/AKfycbwvztxaVKSDYhevhsjQ7LowAMvjBu4ONs2AqXytbNflmEJ_mfBF7mI54fgyhBZzhU8M/exec";
@@ -205,34 +206,6 @@ export default function App() {
         @keyframes fadeUp { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
         .dot-anim { animation: fadeUp 0.5s ease both; }
 
-        .dot-top-bar { width: 100%; background: #111110; padding: 7px clamp(16px,4vw,2rem); border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .dot-top-bar-label { font-family: var(--font-body); font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-
-        .dot-hero { width: 100%; background: #111110; display: flex; align-items: stretch; min-height: 220px; max-height: 280px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .dot-hero-left { flex: 3; padding: 2rem clamp(16px,4vw,2rem); display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-        .dot-hero-logo { display: flex; align-items: center; gap: 14px; }
-        .dot-hero-title { font-family: var(--font-display); font-size: clamp(36px,6vw,52px); color: #f0ede8; line-height: 1; letter-spacing: -0.02em; }
-        .dot-hero-title strong { font-weight: 700; color: #f0ede8; }
-        .dot-hero-title em { font-weight: 300; font-style: italic; color: #be3650; }
-        .dot-hero-sub { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.6); max-width: 520px; }
-        .dot-hero-right { flex: 0 0 230px; min-width: 200px; max-width: 230px; position: relative; overflow: hidden; background: #1a1a18; }
-        .dot-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-
-        .dot-dim-bar { background: #111110; display: flex; align-items: center; border-top: 1.5px solid rgba(134,20,66,0.5); border-bottom: 1.5px solid rgba(134,20,66,0.5); }
-        .dot-dim-col { flex: 1; text-align: center; padding: 8px 4px; font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ede8; }
-        .dot-dim-pipe { width: 1px; height: 18px; background: rgba(255,255,255,0.35); flex-shrink: 0; }
-
-        .dot-inner { max-width: 860px; margin: 0 auto; width: 100%; }
-
-        @media (max-width: 500px) { .dot-hero-right { display: none; } }
-
-        .page-footer-rule { width: 100%; height: 1.5px; background: rgba(134,20,66,0.5); margin: 1.75rem 0 0; }
-
-        .dot-section-header { background: #1a1a18; padding: 2.5rem clamp(16px,4vw,2rem) 2.5rem 0; }
-        .dot-section-header h2 { font-family: var(--font-display); font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; text-align: left; }
-        .dot-section-header h2 .power-word { font-weight: 700; color: #f0ede8; }
-        .dot-section-header h2 .score-word { font-weight: 300; font-style: italic; color: #be3650; }
-
         .dot-input-zone { background: #111110; padding: 1rem clamp(16px,4vw,2rem); border-bottom: 1px solid rgba(255,255,255,0.06); }
         .dot-input-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .dot-input-field { flex: 1; min-width: 200px; padding: 10px 14px; background: #111110; border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); color: #f0ede8; -webkit-text-fill-color: #f0ede8; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; }
@@ -314,40 +287,8 @@ export default function App() {
           Money Moves Brief — Free Revenue Intelligence Tool | Data on Tap
         </h1>
 
-        {/* ── HERO ── */}
-        <div className="dot-hero no-print">
-          <div className="dot-hero-left">
-            <div className="dot-hero-logo">
-              <div style={{ flexShrink: 0, lineHeight: 0 }}>
-                <img src="/favicon.png" alt="POWER Score" width="54" height="54" style={{ display: "block" }} />
-              </div>
-              <div className="dot-hero-title"><strong>Money</strong> <em>Moves Brief</em></div>
-            </div>
-            <div className="dot-hero-sub">
-              <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website leaving money on the table?</p>
-              <p>Get your free AI-generated Money Moves Brief — a fast read on what you do, what makes you worth paying attention to, and exactly where the revenue is hiding.</p>
-            </div>
-          </div>
-          <div className="dot-hero-right">
-            <img src="/power-score-hero.png" alt="POWER Score" />
-          </div>
-        </div>
-
-        <div className="dot-dim-bar no-print">
-          <div className="dot-dim-col">About</div>
-          <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Wow Factor</div>
-          <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Services</div>
-          <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Sleeping Giant</div>
-          <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Revenue Moves</div>
-        </div>
-
-        <div className="dot-section-header no-print">
-          <h2><span style={{ color: "#be3650" }}>Get Your</span> <span className="power-word">Money Moves</span> <span className="score-word">Brief</span></h2>
-        </div>
+        {/* ── HERO BANNER ── */}
+        <HeroBanner />
 
         {/* ── INPUT ZONE ── */}
         <div className="dot-input-zone no-print">
