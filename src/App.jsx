@@ -369,7 +369,7 @@ export default function App() {
                   {report.services.map((s, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
                       <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
-                      <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 400, lineHeight: 1.6, color: "#c8c4bc", margin: 0 }}>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, lineHeight: 1.6, color: "#c8c4bc", margin: 0 }}>
                         <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{s.name}</strong> — {s.note}
                       </p>
                     </div>
@@ -484,8 +484,8 @@ export default function App() {
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>📈 Industry Trends</p>
                         {revenue.trends.map((t, i) => (
                           <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
                               <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{t.title}</strong> — {t.insight}
                             </p>
                           </div>
@@ -501,8 +501,8 @@ export default function App() {
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>🏁 Competitors</p>
                         {revenue.competitors.map((c, i) => (
                           <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
                               <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{c.name}</strong> — {c.moneyMove}
                             </p>
                           </div>
@@ -518,10 +518,10 @@ export default function App() {
                         <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>💰 Revenue Plays</p>
                         {revenue.revenuePlays.map((m, i) => (
                           <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
-                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                            <span style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
                             <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 500, color: "#f0ede8", margin: "0 0 4px", lineHeight: 1.5 }}>{m.play}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>{m.why}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, color: "#f0ede8", margin: "0 0 4px", lineHeight: 1.5 }}>{m.play}</p>
+                              <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 300, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>{m.why}</p>
                             </div>
                           </div>
                         ))}
@@ -534,10 +534,10 @@ export default function App() {
             )}
 
             {/* Coaching CTA */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want to Build Your Money Moves?</h3>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Work with Monica</h3>
             <div className="card dot-anim" style={{ background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442" }}>
               <p className="card-label" style={{ color: "#861442" }}>Work with Monica</p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: "24px", color: "#f0ede8", marginBottom: 20 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#f0ede8", marginBottom: 20 }}>
                 <strong style={{ fontWeight: 500 }}>Ready to build your money moves?</strong> Strategic growth planning for business owners who are done leaving money on the table. We'll map your revenue strategy and find where to use AI to close the gaps.
               </p>
               <a href="https://monicapoling.com/work-with-monica" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: "inline-block", textDecoration: "none" }}>Work with Monica →</a>
@@ -547,7 +547,7 @@ export default function App() {
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Brief</h3>
             <div className="card dot-anim no-print" style={{ marginTop: 0, border: "1.5px solid #861442" }}>
               <p className="card-label">Print / Save This Brief</p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#f0ede8", marginBottom: 20 }}>
                 Save or print this page before you click away, or you'll lose your results.
               </p>
               <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
