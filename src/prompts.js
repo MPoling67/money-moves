@@ -34,6 +34,8 @@ JSON Schema:
     { "name": "string", "note": "1 sentence — what it is and who it's for, from the live site only" }
   ],
 
+  "sleepingGiant": "2-3 sentences max. The single highest-leverage opportunity hiding in plain sight — grounded in the services and wow factor above. Specific to this business, not generic. The thing they're closest to doing right that would move the needle most. No fluff.",
+
   "urlsAttempted": ["https://example.com"],
   "fetchSuccess": true,
   "fetchNote": "Optional — only if fetch issues or sparse content."
@@ -43,44 +45,32 @@ Rules:
 - services: exactly 3, pulled from what you found on the live site. If fewer than 3 are clearly named, infer from page sections or CTAs — but note it in fetchNote.
 - wow.headline: 6 words or fewer. Active, specific, not generic.
 - wow.content: creates an itch, not a verdict. The reader should finish it thinking "wait, what am I missing?"
+- sleepingGiant: exactly 1. Must connect to something specific found on the live site. No generic opportunity statements.
 - Every field: fetched content only. No memory.`;
 
 
-export const REVENUE_SYSTEM_PROMPT = `You are a strategic business analyst. You have been given a POWER Score JSON for a business. Your job is to generate a Revenue Mapping report — a tight, bullet-driven intelligence brief that helps this business owner see where the money is and what to do next.
+export const REVENUE_SYSTEM_PROMPT = `You are a strategic business analyst. You have been given a Money Moves Brief JSON for a business. Your job is to generate the second half of the brief — a tight, scan-friendly intelligence report that shows what competitors are doing, where the market is moving, and exactly what revenue plays to make next.
 
-Tone: direct, specific, zero fluff. Every bullet must be grounded in something from the POWER Score data. No generic advice.
+Tone: direct, specific, zero fluff. Keep everything tight — no long paragraphs. Every item must be grounded in the business data provided. No generic advice.
 
 Return ONLY valid JSON. No markdown, no preamble, no backticks.
 
 JSON Schema:
 {
-  "services": [
-    { "name": "string", "note": "1 sentence — what it is and who it's for" }
+  "competitors": [
+    { "name": "string", "moneyMove": "1 sentence — the single thing they're doing right now that's working" }
   ],
-
-  "sleepingGiant": "2-3 sentences. The single highest-leverage opportunity hiding in plain sight. Specific to this business — not generic. The thing they're closest to doing right that would move the needle most.",
 
   "trends": [
-    { "title": "string", "insight": "1-2 sentences max. What the trend is and why it matters for THIS business specifically." }
+    { "title": "string", "insight": "1-2 sentences max. What's moving in this space and why it matters for THIS business specifically." }
   ],
 
-"faqs": [
-  { "question": "...", "answered": true/false, "note": "..." }
-  ],
- 
-  "competitors": [
-    { "name": "string", "win": "1 sentence — the one thing they're doing better right now" }
-  ],
-
-  "revenueMoves": [
-    { "move": "string — 6-10 words, action-oriented", "why": "1 sentence — grounded in a specific POWER finding" }
+  "revenuePlays": [
+    { "play": "string — 6-10 words, action-oriented", "why": "1 sentence — grounded in a specific detail from the brief" }
   ]
 }
 
 Rules:
-- services: exactly 3, pulled from what the POWER Score found on the live site
-- sleepingGiant: exactly 1
-- trends: exactly 3, current and relevant to this specific business category
-- faqs: exactly 3, questions real buyers ask before hiring/buying
-- competitors: exactly 3, real named businesses
-- revenueMoves: exactly 3, each one a direct response to a gap or strength in the POWER Score`;
+- competitors: exactly 3, real named businesses in this space. One sentence each — their #1 money move only.
+- trends: exactly 3, current and relevant to this specific business category. No evergreen platitudes.
+- revenuePlays: exactly 3, each a direct response to a gap or strength in the brief data. Action-oriented, specific, no filler.`;
