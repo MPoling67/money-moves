@@ -391,53 +391,51 @@ export default function App() {
             )}
 
             {/* ── EMAIL GATE ── */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want Your Money Moves?</h3>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want More Money Moves?</h3>
 
             {!emailSubmitted ? (
-              <>
-                {/* Box 1 — teaser */}
-                <div className="card dot-anim" style={{ animationDelay: "0.3s", marginBottom: 12 }}>
-                  <p className="card-label">Get Your Money Moves</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {["Your Sleeping Giant (your most overlooked opportunity)", "Competitor Analysis", "Revenue Moves"].map((item) => (
-                      <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                          <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
-                          <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8", lineHeight: 1.8 }}>{item}</span>
-                      </div>
-                    ))}
-                  </div>
+              <div className="card dot-anim no-print" style={{ animationDelay: "0.3s", border: "1.5px solid #861442", background: "rgba(134,20,66,0.08)" }}>
+
+                {/* Teaser list */}
+                <p className="card-label">Get Your Money Moves</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+                  {["What Your Competitors are Doing", "Industry Trends Worth Watching", "Three Additional Revenue Plays"].map((item) => (
+                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
+                        <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8", lineHeight: 1.8 }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
 
-                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 700, color: "#861442", margin: "0 0 0.75rem", letterSpacing: "-0.01em" }}>Yes! Show Me the Money Moves</h3>
+                <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "0 0 20px" }} />
 
-                {/* Box 2 — CTA, crimson */}
-                <div className="dot-anim no-print" style={{ animationDelay: "0.4s", background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442", borderRadius: "var(--radius)", padding: "clamp(18px,4vw,24px) clamp(18px,4vw,28px)", marginBottom: 14 }}>
-                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
-                    <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
-                      placeholder="First name" className="dot-field" style={{ flex: 1, minWidth: 140 }} />
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
-                      placeholder="Email address" className="dot-field" style={{ flex: 2, minWidth: 200 }} />
-                  </div>
-                  {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
-                  <button className="btn-primary" onClick={handleEmailSubmit}
-                    disabled={emailSubmitting || !email.trim() || !firstName.trim()}
-                    style={{ marginBottom: 12, width: "100%" }}>
-                    {emailSubmitting ? "Sending..." : "Unlock My Full Report →"}
-                  </button>
-                  <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
-                    <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
-                      style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
-                    I understand I'll be subscribed to Let's Make Some Noise with weekly AI tips. I can unsubscribe any time.
-                  </label>
+                {/* Sign up */}
+                <p className="card-label">Yes! Show Me the Money Moves</p>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
+                  <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="First name" className="dot-field" style={{ flex: 1, minWidth: 140 }} />
+                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleEmailSubmit()}
+                    placeholder="Email address" className="dot-field" style={{ flex: 2, minWidth: 200 }} />
                 </div>
-              </>
+                {emailError && <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#c0705a", marginBottom: 10 }}>{emailError}</p>}
+                <button className="btn-primary" onClick={handleEmailSubmit}
+                  disabled={emailSubmitting || !email.trim() || !firstName.trim()}
+                  style={{ marginBottom: 12, width: "100%" }}>
+                  {emailSubmitting ? "Sending..." : "Unlock My Money Moves →"}
+                </button>
+                <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
+                  <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
+                    style={{ accentColor: "#861442", width: 13, height: 13, cursor: "pointer", flexShrink: 0 }} />
+                  I understand I'll be subscribed to Let's Make Some Noise with weekly AI tips. I can unsubscribe any time.
+                </label>
+              </div>
             ) : (
               <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#4caf8a", marginBottom: 14 }}>
-                ✓ Report unlocked — your full intel is below.
+                ✓ Unlocked — your full money moves are below.
               </p>
             )}
 
@@ -457,31 +455,6 @@ export default function App() {
                 )}
                 {revenue && (
                   <div className="card dot-anim">
-
-                    {/* Services */}
-                    {revenue.services?.length > 0 && (
-                      <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>🛠️ Your Services</p>
-                        {revenue.services.map((s, i) => (
-                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
-                            <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>
-                              <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{s.name}</strong> — {s.note}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
-
-                    {/* Sleeping Giant */}
-                    {revenue.sleepingGiant && (
-                      <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>🎯 Sleeping Giant</p>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, lineHeight: 1.5, color: "#c8c4bc", margin: 0 }}>{revenue.sleepingGiant}</p>
-                      </div>
-                    )}
 
                     <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
