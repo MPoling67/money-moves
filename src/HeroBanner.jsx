@@ -17,7 +17,7 @@ export default function HeroBanner({
         .hb-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(36px,6vw,52px); color: #f0ede8; line-height: 1; letter-spacing: -0.02em; }
         .hb-title strong { font-weight: 700; color: #f0ede8; }
         .hb-title em { font-weight: 300; font-style: italic; color: #be3650; }
-        .hb-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 24px; color: rgba(255,255,255,0.6); max-width: 520px; }
+        .hb-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 24px; color: #f0ede8; max-width: 520px; }
         .hb-sub-headline { margin-bottom: 0.5rem; font-weight: 500; color: #f0ede8; }
         .hb-hero-right { flex: 0 0 230px; min-width: 200px; max-width: 230px; position: relative; overflow: hidden; background: #1a1a18; }
         .hb-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
