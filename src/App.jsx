@@ -43,14 +43,14 @@ async function generateReport(rawUrl) {
   }]);
 }
 
-async function generateRevenue(powerData) {
+async function generateRevenue(briefData) {
   const body = {
     model: "claude-sonnet-4-6",
     max_tokens: 2000,
     system: REVENUE_SYSTEM_PROMPT,
     messages: [{
       role: "user",
-      content: `Here is the POWER Score data for your  business:\n\n${JSON.stringify(powerData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
+      content: `Here is the Money Moves Brief data for this business:\n\n${JSON.stringify(briefData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
     }]
   };
   const r = await fetch("/api/anthropic", {
@@ -227,18 +227,6 @@ export default function App() {
         .card-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #be3650; margin-bottom: 14px; }
         .card-body { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 24px; color: #c8c4bc; }
 
-        .dot-score-num { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(72px,13vw,108px); line-height: 1; letter-spacing: -0.04em; color: #be3650; }
-        .dot-score-den { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: #c8c4bc; padding-bottom: 8px; }
-
-        .power-row { padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-        .power-row:first-child { padding-top: 0; }
-        .power-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .power-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-        .power-title { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: #f0ede8; }
-        .power-letter { color: #be3650; margin-right: 4px; }
-        .power-score-val { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--muted); white-space: nowrap; }
-        .power-content { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; margin-top: 10px; }
-
         .dot-field { width: 100%; padding: 10px 14px; background: #111110 !important; border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); color: #f0ede8 !important; font-family: var(--font-body); font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.2s; -webkit-text-fill-color: #f0ede8 !important; caret-color: #f0ede8; }
         .dot-field:focus { border-color: #861442; background: #111110 !important; }
         .dot-field::placeholder { color: #5a5a56; opacity: 1; }
@@ -263,13 +251,6 @@ export default function App() {
           .dot-report-head { padding: 12px 0 10px !important; border-bottom: 1px solid #ddd !important; }
           .dot-report-name { font-size: 22px !important; color: #000 !important; }
           .dot-report-date { color: #861442 !important; }
-          .dot-score-num { font-size: 48px !important; color: #861442 !important; }
-          .dot-score-den { color: #444 !important; }
-          .power-row { padding: 10px 0 !important; border-bottom: 1px solid #eee !important; }
-          .power-title { color: #000 !important; }
-          .power-letter { color: #861442 !important; }
-          .power-score-val { color: #444 !important; }
-          .power-content { color: #111 !important; line-height: 1.5 !important; }
           .dot-report-zone { padding-bottom: 20px !important; background: #fff !important; }
           .dot-dim-bar { background: #f0f0f0 !important; border-bottom: 1px solid #ddd !important; }
           .dot-dim-col { color: #000 !important; }
