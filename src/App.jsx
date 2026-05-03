@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { POWER_SYSTEM_PROMPT } from './prompt.js';
+import { MONEY_MOVES_SYSTEM_PROMPT } from './prompt.js';
 import { REVENUE_SYSTEM_PROMPT } from './prompt2.js';
 
 // ── LOGGER ────────────────────────────────────────────────────────────────────
@@ -16,7 +16,7 @@ function normalizeUrl(input) {
 }
 
 async function callAPI(system, messages) {
-  const body = { model: "claude-sonnet-4-6", max_tokens: 3000, system, messages,
+  const body = { model: "claude-sonnet-4-6", max_tokens: 2000, system, messages,
     tools: [{ type: "web_search_20250305", name: "web_search" }] };
   const r = await fetch("/api/anthropic", {
     method: "POST",
@@ -37,7 +37,7 @@ async function callAPI(system, messages) {
 
 async function generateReport(rawUrl) {
   const url = normalizeUrl(rawUrl);
-  return callAPI(POWER_SYSTEM_PROMPT, [{
+  return callAPI(MONEY_MOVES_SYSTEM_PROMPT, [{
     role: "user",
     content: `You MUST use the web_search tool to fetch and read the LIVE website right now. Do not use memory.\n\nREQUIRED SEQUENCE — follow exactly:\n1. Use web_search to fetch: ${url}\n2. Read the FULL returned content carefully.\n3. If content is empty or an error, try these in order:\n   - ${url}/\n   - ${url.replace(/^https:\/\//, "https://www.")}\n   - ${url.replace(/^https:\/\/www\./, "https://")}\n4. Before writing the report, list internally 5+ SPECIFIC details from the page you just read. These details MUST appear in your report.\n5. Write the report using ONLY those fetched details.\n\nWARNING: The URL being analyzed is ${url}. You have NO prior knowledge of this business that is reliable. Your training data about this person or business is FORBIDDEN — it is outdated and inaccurate. Only what you read from the live page right now is valid.\n\nRecord every URL attempted in urlsAttempted. If you truly cannot fetch content after all attempts, set fetchSuccess to false, explain in fetchNote, and score conservatively (8/20 max per dimension). Return the full JSON.`
   }]);
@@ -71,21 +71,13 @@ async function generateRevenue(powerData) {
 }
 
 // ── CONSTANTS ─────────────────────────────────────────────────────────────────
-const POWER_SECTIONS = [
-  { key: "prestige",   letter: "P", label: "Prestige",   sub: "Do You Own Your Category?" },
-  { key: "origin",     letter: "O", label: "Ownership",  sub: "What's Your Origin Story?" },
-  { key: "wow",        letter: "W", label: "Wow Factor", sub: "What Makes You Unforgettable?" },
-  { key: "expertise",  letter: "E", label: "Expertise",  sub: "Do You Demonstrate Clear Expertise?" },
-  { key: "reputation", letter: "R", label: "Reputation", sub: "Are You the Voice of Your Industry?" },
-];
-
 const LOAD_STEPS = [
   "Pulling up your site...",
-  "Wow! This is great stuff...",
-  "Evaluating your P·O·W·E·R...",
-  "Personality, deconstructed...",
-  "Love what you're doing...",
-  "Calculating your POWER Score...",
+  "Reading what's actually there...",
+  "Finding the wow factor...",
+  "Mapping your services...",
+  "Almost there...",
+  "Putting it together...",
 ];
 
 // ── SUB-COMPONENTS ────────────────────────────────────────────────────────────
@@ -130,7 +122,6 @@ export default function App() {
   const [revenueError, setRevenueError] = useState(null);
 
   const isMonica = new URLSearchParams(window.location.search).has("monica");
-  const sc = report?.overallScore || 0;
 
   const handleGenerate = async () => {
     if (!url.trim()) return;
@@ -145,13 +136,13 @@ export default function App() {
     try {
       const result = await generateReport(url);
       setReport(result);
-      document.title = `POWER Score — ${result.businessName}`;
+      document.title = `Money Moves Brief — ${result.businessName}`;
       const now = new Date();
       const humanTime = now.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true });
       fetch(LOGGER, {
         method: "POST", mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ timestamp: humanTime, event: "report_run", app: "PWR Score", url: url.trim(), score: result.overallScore || "", firstName: "", email: "", subscribe: "" }),
+        body: JSON.stringify({ timestamp: humanTime, event: "report_run", app: "Money Moves", url: url.trim(), score: "", firstName: "", email: "", subscribe: "" }),
       }).catch(() => {});
       if (!result.fetchSuccess || result.fetchNote) {
         setDebugInfo(
@@ -180,7 +171,7 @@ export default function App() {
       await fetch(LOGGER, {
         method: "POST", mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ timestamp: humanTime, event: "email_submit", app: "PWR Score", url: url.trim(), score: report?.overallScore || "", firstName: firstName.trim(), email: email.trim(), subscribe: emailSubscribe ? "yes" : "no" }),
+        body: JSON.stringify({ timestamp: humanTime, event: "email_submit", app: "Money Moves", url: url.trim(), score: report?.overallScore || "", firstName: firstName.trim(), email: email.trim(), subscribe: emailSubscribe ? "yes" : "no" }),
       });
       setEmailSubmitted(true);
       setRevenueLoading(true);
@@ -320,7 +311,7 @@ export default function App() {
 
         {/* SEO hidden h1 */}
         <h1 style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}>
-          POWER Score — Free Competitive Analysis Tool | Data on Tap
+          Money Moves Brief — Free Revenue Intelligence Tool | Data on Tap
         </h1>
 
         {/* ── HERO ── */}
@@ -330,11 +321,11 @@ export default function App() {
               <div style={{ flexShrink: 0, lineHeight: 0 }}>
                 <img src="/favicon.png" alt="POWER Score" width="54" height="54" style={{ display: "block" }} />
               </div>
-              <div className="dot-hero-title"><strong>POWER</strong> <em>Score</em></div>
+              <div className="dot-hero-title"><strong>Money</strong> <em>Moves Brief</em></div>
             </div>
             <div className="dot-hero-sub">
               <p style={{ marginBottom: "0.5rem", fontWeight: 500, color: "#f0ede8" }}>Is your website leaving money on the table?</p>
-              <p>Get your POWER Score, a free AI-generated website analysis that shows you exactly where you're underselling what you do — and how to fix it.</p>
+              <p>Get your free AI-generated Money Moves Brief — a fast read on what you do, what makes you worth paying attention to, and exactly where the revenue is hiding.</p>
             </div>
           </div>
           <div className="dot-hero-right">
@@ -343,19 +334,19 @@ export default function App() {
         </div>
 
         <div className="dot-dim-bar no-print">
-          <div className="dot-dim-col">Prestige</div>
-          <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Ownership</div>
+          <div className="dot-dim-col">About</div>
           <div className="dot-dim-pipe" />
           <div className="dot-dim-col">Wow Factor</div>
           <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Expertise</div>
+          <div className="dot-dim-col">Services</div>
           <div className="dot-dim-pipe" />
-          <div className="dot-dim-col">Reputation</div>
+          <div className="dot-dim-col">Sleeping Giant</div>
+          <div className="dot-dim-pipe" />
+          <div className="dot-dim-col">Revenue Moves</div>
         </div>
 
         <div className="dot-section-header no-print">
-          <h2><span style={{ color: "#be3650" }}>Get Your</span> <span className="power-word">POWER</span> <span className="score-word">Score</span></h2>
+          <h2><span style={{ color: "#be3650" }}>Get Your</span> <span className="power-word">Money Moves</span> <span className="score-word">Brief</span></h2>
         </div>
 
         {/* ── INPUT ZONE ── */}
@@ -371,7 +362,7 @@ export default function App() {
                 className="dot-input-field"
               />
               <button className="btn-primary" onClick={handleGenerate} disabled={loading || !url.trim()}>
-                {loading ? "Analyzing..." : "Get My Score →"}
+                {loading ? "Analyzing..." : "Get My Brief →"}
               </button>
             </div>
             {loading && <div style={{ marginTop: 14 }}><PulseLoader text={progress} /></div>}
@@ -411,44 +402,47 @@ export default function App() {
             )}
 
             {/* Score */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Your POWER Score</h3>
-            <div className="card dot-anim" style={{ animationDelay: "0.05s" }}>
-              <p className="card-label">Your POWER Score</p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
-                <span className="dot-score-num">{sc}</span>
-                <span className="dot-score-den">/100</span>
-              </div>
-              <div style={{ background: "#4a4a46", borderRadius: 2, height: 3, overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${sc}%`, background: "#861442", borderRadius: 2, animation: "dot-bar 1.2s ease forwards" }} />
-              </div>
-            </div>
 
-            {/* About + POWER Breakdown */}
+            {/* About + Wow + Services */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>
               About {report.businessName} <span style={{ fontWeight: 300, fontSize: 16, color: "var(--muted)", fontStyle: "normal" }}>| {url}</span>
             </h3>
             <div className="card dot-anim" style={{ animationDelay: "0.1s" }}>
               <p className="card-label">About {report.businessName}</p>
               <p className="card-body">{report.orgParagraph}</p>
-
-              <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
-
-              <p className="card-label">P·O·W·E·R Score Breakdown</p>
-              {POWER_SECTIONS.map(({ key, letter, label, sub }) => {
-                const section = report[key];
-                if (!section) return null;
-                return (
-                  <div key={key} className="power-row">
-                    <div className="power-meta">
-                      <span className="power-title"><span className="power-letter">{letter}</span>— {label}: {sub}</span>
-                      <span className="power-score-val">{section.score}/20</span>
-                    </div>
-                    <ScoreBar score={section.score} max={20} />
-                    <p className="power-content">{section.content}</p>
-                  </div>
-                );
-              })}
             </div>
+
+            {/* Wow Factor */}
+            {report.wow && (
+              <>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>What Makes Them Worth Watching</h3>
+                <div className="card dot-anim" style={{ animationDelay: "0.15s" }}>
+                  <p className="card-label">Wow Factor</p>
+                  {report.wow.headline && (
+                    <p style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 22, fontWeight: 300, fontStyle: "italic", color: "#be3650", marginBottom: 12, lineHeight: 1.3 }}>{report.wow.headline}</p>
+                  )}
+                  <p className="card-body">{report.wow.content}</p>
+                </div>
+              </>
+            )}
+
+            {/* Services */}
+            {report.services?.length > 0 && (
+              <>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>What They Offer</h3>
+                <div className="card dot-anim" style={{ animationDelay: "0.2s" }}>
+                  <p className="card-label">Services</p>
+                  {report.services.map((s, i) => (
+                    <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
+                      <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 400, lineHeight: 1.6, color: "#c8c4bc", margin: 0 }}>
+                        <strong style={{ fontWeight: 500, color: "#f0ede8" }}>{s.name}</strong> — {s.note}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
 
             {/* ── EMAIL GATE ── */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Want Your Money Moves?</h3>
@@ -631,16 +625,16 @@ export default function App() {
             </div>
 
             {/* Print */}
-            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Page</h3>
+            <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Brief</h3>
             <div className="card dot-anim no-print" style={{ marginTop: 0 }}>
-              <p className="card-label">Print / Save This Page</p>
+              <p className="card-label">Print / Save This Brief</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#f0ede8", marginBottom: 20 }}>
                 Save or print this page before you click away, or you'll lose your results.
               </p>
               <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
               {isMonica && report && (
                 <button className="btn-ghost" style={{ marginTop: 12 }}
-                  onClick={() => { console.log("POWER Score Report Data:", JSON.stringify(report, null, 2)); alert("Report data logged to console (F12 → Console)."); }}>
+                  onClick={() => { console.log("Money Moves Brief Data:", JSON.stringify(report, null, 2)); alert("Brief data logged to console (F12 → Console)."); }}>
                   Log Report Data →
                 </button>
               )}
@@ -652,7 +646,7 @@ export default function App() {
         {/* ── FOOTER ── */}
         <div className="page-footer-rule" />
         <footer className="page-footer no-print">
-          <div>© 2026 POWER Score &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
+          <div>© 2026 Money Moves Brief &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
         </footer>
 
       </div>
