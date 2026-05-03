@@ -342,36 +342,29 @@ export default function App() {
               </div>
             )}
 
-            {/* Score */}
-
-            {/* About + Wow + Services */}
+            {/* ── ONE CARD: About + Wow + Services ── */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>
               About {report.businessName} <span style={{ fontWeight: 300, fontSize: 16, color: "var(--muted)", fontStyle: "normal" }}>| {url}</span>
             </h3>
             <div className="card dot-anim" style={{ animationDelay: "0.1s" }}>
+
               <p className="card-label">About {report.businessName}</p>
               <p className="card-body">{report.orgParagraph}</p>
-            </div>
 
-            {/* Wow Factor */}
-            {report.wow && (
-              <>
-                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>What Makes Them Worth Watching</h3>
-                <div className="card dot-anim" style={{ animationDelay: "0.15s" }}>
+              {report.wow && (
+                <>
+                  <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
                   <p className="card-label">Wow Factor</p>
                   {report.wow.headline && (
-                    <p style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 22, fontWeight: 300, fontStyle: "italic", color: "#be3650", marginBottom: 12, lineHeight: 1.3 }}>{report.wow.headline}</p>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, color: "#f0ede8", marginBottom: 8, lineHeight: 1.5 }}>{report.wow.headline}</p>
                   )}
                   <p className="card-body">{report.wow.content}</p>
-                </div>
-              </>
-            )}
+                </>
+              )}
 
-            {/* Services */}
-            {report.services?.length > 0 && (
-              <>
-                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>What They Offer</h3>
-                <div className="card dot-anim" style={{ animationDelay: "0.2s" }}>
+              {report.services?.length > 0 && (
+                <>
+                  <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
                   <p className="card-label">Services</p>
                   {report.services.map((s, i) => (
                     <div key={i} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
@@ -381,6 +374,18 @@ export default function App() {
                       </p>
                     </div>
                   ))}
+                </>
+              )}
+
+            </div>
+
+            {/* ── SLEEPING GIANT ── */}
+            {report.sleepingGiant && (
+              <>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Sleeping Giant</h3>
+                <div className="card dot-anim" style={{ animationDelay: "0.2s" }}>
+                  <p className="card-label">Your Biggest Money Move</p>
+                  <p className="card-body">{report.sleepingGiant}</p>
                 </div>
               </>
             )}
