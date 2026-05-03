@@ -26,7 +26,7 @@ export default function SubscribeBar({ appName = "", url = "", score = "" }) {
       <div style={{ maxWidth: 860, margin: "0 auto" }}>
         <div style={{ marginBottom: "1.25rem" }}>
           <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.5rem" }}>Let's Make Some Noise</div>
-          <p style={{ fontSize: 14, fontWeight: 300, fontStyle: "italic", color: "#f0ede8", lineHeight: 1.5, margin: "0 0 0.35rem", fontFamily: "'Fraunces', Georgia, serif" }}>Turn what you know into what you're known for.</p>
+          <p style={{ fontSize: 14, fontWeight: 300, fontStyle: "italic", color: "#c8c4bc", lineHeight: 1.5, margin: "0 0 0.35rem", fontFamily: "'Fraunces', Georgia, serif" }}>Turn what you know into what you're known for.</p>
           <p style={{ fontSize: 13, fontWeight: 300, color: "var(--muted)", lineHeight: 1.6, margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Subscribe to get weekly ideas on how to use AI to organize, share, and monetize your expertise.</p>
         </div>
         {!submitted ? (
