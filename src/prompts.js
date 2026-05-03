@@ -73,4 +73,4 @@ JSON Schema:
 Rules:
 - competitors: exactly 3, real named businesses in this space. One sentence each — their #1 money move only.
 - trends: exactly 3, current and relevant to this specific business category. No evergreen platitudes.
-- revenuePlays: exactly 3, each a direct response to a gap or strength in the brief data. Action-oriented, specific, no filler.`;
+- revenuePlays: exactly 3. Two must be tactical and immediately actionable — specific enough that the business owner could open their website or calendar today and do it. Think: "Add a contact form above the fold" not "Improve lead capture." One may be strategic. All three must be grounded in something specific from the brief data. No filler.`;
