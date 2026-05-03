@@ -1,8 +1,7 @@
 import { useState } from "react";
 import HeroBanner from './HeroBanner.jsx';
 
-import { MONEY_MOVES_SYSTEM_PROMPT } from './prompts.js';
-import { REVENUE_SYSTEM_PROMPT } from './prompts.js';
+import { MONEY_MOVES_SYSTEM_PROMPT, REVENUE_SYSTEM_PROMPT } from './prompts.js';
 
 // ── LOGGER ────────────────────────────────────────────────────────────────────
 const LOGGER = "https://script.google.com/macros/s/AKfycbwvztxaVKSDYhevhsjQ7LowAMvjBu4ONs2AqXytbNflmEJ_mfBF7mI54fgyhBZzhU8M/exec";
