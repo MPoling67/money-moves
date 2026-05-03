@@ -226,7 +226,7 @@ export default function App() {
 
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,4vw,24px) clamp(18px,4vw,28px); margin-bottom: 14px; }
         .card-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #be3650; margin-bottom: 14px; }
-        .card-body { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 24px; color: #f0ede8; }
+        .card-body { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 24px; color: #c8c4bc; }
 
         .dot-score-num { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(72px,13vw,108px); line-height: 1; letter-spacing: -0.04em; color: #be3650; }
         .dot-score-den { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: #c8c4bc; padding-bottom: 8px; }
@@ -405,7 +405,7 @@ export default function App() {
                         <circle cx="8" cy="8" r="8" fill="#2a5c3f"/>
                         <polyline points="4,8 7,11 12,5" stroke="#4caf8a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
-                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#f0ede8", lineHeight: 1.8 }}>{item}</span>
+                      <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 300, color: "#c8c4bc", lineHeight: 1.8 }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -518,8 +518,8 @@ export default function App() {
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Work with Monica</h3>
             <div className="card dot-anim" style={{ background: "rgba(134,20,66,0.08)", border: "1.5px solid #861442" }}>
               <p className="card-label" style={{ color: "#861442" }}>Work with Monica</p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#f0ede8", marginBottom: 20 }}>
-                <strong style={{ fontWeight: 500 }}>Ready to build your money moves?</strong> Strategic growth planning for business owners who are done leaving money on the table. We'll map your revenue strategy and find where to use AI to close the gaps.
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#c8c4bc", marginBottom: 20 }}>
+                <strong style={{ fontWeight: 500, color: "#f0ede8" }}>Ready to build your money moves?</strong> Strategic growth planning for business owners who are done leaving money on the table. We'll map your revenue strategy and find where to use AI to close the gaps.
               </p>
               <a href="https://monicapoling.com/work-with-monica" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: "inline-block", textDecoration: "none" }}>Work with Monica →</a>
             </div>
@@ -528,7 +528,7 @@ export default function App() {
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Brief</h3>
             <div className="card dot-anim no-print" style={{ marginTop: 0, border: "1.5px solid #861442" }}>
               <p className="card-label">Print / Save This Brief</p>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#f0ede8", marginBottom: 20 }}>
+              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#c8c4bc", marginBottom: 20 }}>
                 Save or print this page before you click away, or you'll lose your results.
               </p>
               <button className="btn-primary" onClick={() => window.print()}>Print / Save as PDF →</button>
