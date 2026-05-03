@@ -226,7 +226,7 @@ export default function App() {
 
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(18px,4vw,24px) clamp(18px,4vw,28px); margin-bottom: 14px; }
         .card-label { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #be3650; margin-bottom: 14px; }
-        .card-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: #f0ede8; }
+        .card-body { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 24px; color: #f0ede8; }
 
         .dot-score-num { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: clamp(72px,13vw,108px); line-height: 1; letter-spacing: -0.04em; color: #be3650; }
         .dot-score-den { font-family: var(--font-display); font-size: 22px; font-weight: 300; color: #c8c4bc; padding-bottom: 8px; }
@@ -356,7 +356,7 @@ export default function App() {
                   <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "20px 0" }} />
                   <p className="card-label">Wow Factor</p>
                   {report.wow.headline && (
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 500, color: "#f0ede8", marginBottom: 8, lineHeight: 1.5 }}>{report.wow.headline}</p>
+                    <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 500, color: "#f0ede8", marginBottom: 8, lineHeight: "24px" }}>{report.wow.headline}</p>
                   )}
                   <p className="card-body">{report.wow.content}</p>
                 </>
