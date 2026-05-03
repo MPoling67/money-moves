@@ -1,75 +1,68 @@
-export default function HeroBanner({
-  titleStrong = "Money Moves",
-  titleEm = "Brief",
-  subHeadline = "Is your website leaving money on the table?",
-  subBody = "Get your free AI-generated Money Moves Brief — a fast read on what you do, what makes you worth paying attention to, and exactly where the revenue is hiding.",
-  dimLabels = ["About", "Wow Factor", "Services", "Sleeping Giant", "Revenue Moves"],
-  heroImage = "/money-moves-hero.png",
-  faviconSrc = "/favicon.png",
-  faviconAlt = "Money Moves Brief",
-}) {
+import { useState } from "react";
+
+const LOGGER = "https://script.google.com/macros/s/AKfycbwvztxaVKSDYhevhsjQ7LowAMvjBu4ONs2AqXytbNflmEJ_mfBF7mI54fgyhBZzhU8M/exec";
+
+export default function SubscribeBar({ appName = "", url = "", score = "" }) {
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!email.trim()) return;
+    try {
+      const now = new Date();
+      const humanTime = now.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true });
+      await fetch(LOGGER, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ timestamp: humanTime, event: "newsletter_footer_submit", app: appName, url, score, firstName: firstName.trim(), email: email.trim(), subscribe: "yes" }),
+      });
+      setSubmitted(true);
+    } catch { /* silent */ }
+  };
+
   return (
-    <>
-      <style>{`
-        .hb-hero { width: 100%; background: #111110; display: flex; align-items: stretch; min-height: 220px; max-height: 280px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .hb-hero-left { flex: 3; padding: 2rem clamp(16px,4vw,2rem); display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-        .hb-logo-row { display: flex; align-items: center; gap: 14px; }
-        .hb-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(36px,6vw,52px); color: #f0ede8; line-height: 1; letter-spacing: -0.02em; }
-        .hb-title strong { font-weight: 700; color: #f0ede8; }
-        .hb-title em { font-weight: 300; font-style: italic; color: #be3650; }
-        .hb-sub { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 24px; color: #f0ede8; max-width: 520px; }
-        .hb-sub-headline { margin-bottom: 0.5rem; font-weight: 500; color: #f0ede8; }
-        .hb-hero-right { flex: 0 0 230px; min-width: 200px; max-width: 230px; position: relative; overflow: hidden; background: #1a1a18; }
-        .hb-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-        .hb-dim-bar { background: #111110; display: flex; align-items: center; border-top: 1.5px solid rgba(134,20,66,0.5); border-bottom: 1.5px solid rgba(134,20,66,0.5); }
-        .hb-dim-col { flex: 1; text-align: center; padding: 8px 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #f0ede8; }
-        .hb-dim-pipe { width: 1px; height: 18px; background: rgba(255,255,255,0.35); flex-shrink: 0; }
-        .hb-section-header { background: #1a1a18; padding: 2.5rem clamp(16px,4vw,2rem) 2.5rem 0; }
-        .hb-section-header h2 { font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 300; color: #f0ede8; margin: 0; letter-spacing: -0.01em; text-align: left; }
-        .hb-section-header h2 .hb-word-strong { font-weight: 700; color: #f0ede8; }
-        .hb-section-header h2 .hb-word-em { font-weight: 300; font-style: italic; color: #be3650; }
-        @media (max-width: 500px) { .hb-hero-right { display: none; } }
-      `}</style>
-
-      {/* Hero */}
-      <div className="hb-hero no-print">
-        <div className="hb-hero-left">
-          <div className="hb-logo-row">
-            <div style={{ flexShrink: 0, lineHeight: 0 }}>
-              <img src={faviconSrc} alt={faviconAlt} width="54" height="54" style={{ display: "block" }} />
-            </div>
-            <div className="hb-title">
-              <strong>{titleStrong}</strong> <em>{titleEm}</em>
-            </div>
-          </div>
-          <div className="hb-sub">
-            <p className="hb-sub-headline">{subHeadline}</p>
-            <p>{subBody}</p>
-          </div>
+    <div className="no-print" style={{ background: "#242422", padding: "2rem clamp(16px,4vw,2rem)" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <div style={{ marginBottom: "1.25rem" }}>
+          <div style={{ fontSize: 11, fontWeight: 500, textTransform: "uppercase", letterSpacing: "0.14em", color: "#be3650", marginBottom: "0.5rem" }}>Let's Make Some Noise</div>
+          <p style={{ fontSize: 14, fontWeight: 300, fontStyle: "italic", color: "#c8c4bc", lineHeight: 1.5, margin: "0 0 0.35rem", fontFamily: "'Fraunces', Georgia, serif" }}>Turn what you know into what you're known for.</p>
+          <p style={{ fontSize: 13, fontWeight: 300, color: "var(--muted)", lineHeight: 1.6, margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Subscribe to get weekly ideas on how to use AI to organize, share, and monetize your expertise.</p>
         </div>
-        <div className="hb-hero-right">
-          <img src={heroImage} alt={faviconAlt} />
-        </div>
-      </div>
-
-      {/* Dim bar */}
-      <div className="hb-dim-bar no-print">
-        {dimLabels.map((label, i) => (
+        {!submitted ? (
           <>
-            {i > 0 && <div key={`pipe-${i}`} className="hb-dim-pipe" />}
-            <div key={label} className="hb-dim-col">{label}</div>
+            <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First name"
+                style={{ flex: 1, background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }}
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                placeholder="your@email.com"
+                style={{ flex: 2, background: "#111110", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "9px 12px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, color: "#f0ede8", WebkitTextFillColor: "#f0ede8", outline: "none" }}
+              />
+              <button
+                onClick={handleSubmit}
+                disabled={!email.trim()}
+                style={{ background: "#861442", color: "#fff", border: "none", borderRadius: 8, padding: "9px 20px", fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 13, fontWeight: 500, whiteSpace: "nowrap", cursor: email.trim() ? "pointer" : "not-allowed", opacity: email.trim() ? 1 : 0.4, transition: "opacity .18s" }}
+              >
+                Subscribe Now →
+              </button>
+            </div>
+            <p style={{ fontSize: 11, color: "#5a5a56", lineHeight: 1.6, margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+              By submitting, you'll be subscribed to the Let's Make Some Noise newsletter. You may unsubscribe any time.
+            </p>
           </>
-        ))}
+        ) : (
+          <p style={{ fontSize: 13, color: "#4caf8a", fontWeight: 400, fontFamily: "'Plus Jakarta Sans', sans-serif" }}>✓ You're in! Watch for Let's Make Some Noise.</p>
+        )}
       </div>
-
-      {/* Section header */}
-      <div className="hb-section-header no-print">
-        <h2>
-          <span style={{ color: "#be3650" }}>Get Your</span>{" "}
-          <span className="hb-word-strong">{titleStrong}</span>{" "}
-          <span className="hb-word-em">{titleEm}</span>
-        </h2>
-      </div>
-    </>
+    </div>
   );
 }
