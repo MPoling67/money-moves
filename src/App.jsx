@@ -458,25 +458,6 @@ export default function App() {
 
                     <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
-                    {/* Customer FAQ */}
-                    {revenue.faqs?.length > 0 && (
-                      <div style={{ marginBottom: 20 }}>
-                        <p style={{ fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "#be3650", marginBottom: 10 }}>❓ Customer FAQ</p>
-                        {revenue.faqs.map((f, i) => (
-                          <div key={i} style={{ display: "flex", gap: 10, marginBottom: 12 }}>
-                            <span style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 400, color: "#be3650", flexShrink: 0, lineHeight: 1.5 }}>→</span>
-                            <div>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 500, color: "#f0ede8", margin: "0 0 4px", lineHeight: 1.5 }}>{f.question}</p>
-                              <p style={{ fontFamily: "var(--font-body)", fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: "#f0ede8", margin: 0 }}>
-                                <strong style={{ fontWeight: 500, color: "#be3650" }}>{f.answered ? "✓ Answered" : "✗ Not answered"}</strong> — {f.note}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
 
                     {/* Trends */}
                     {revenue.trends?.length > 0 && (
