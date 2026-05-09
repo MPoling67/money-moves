@@ -50,7 +50,7 @@ async function generateRevenue(briefData) {
     system: REVENUE_SYSTEM_PROMPT,
     messages: [{
       role: "user",
-      content: `Here is the Money Moves Brief data for this business:\n\n${JSON.stringify(briefData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
+      content: `Here is the Money Moves analysis for this business:\n\n${JSON.stringify(briefData, null, 2)}\n\nGenerate the Revenue Mapping JSON. Be specific to this business — no generic advice.`
     }]
   };
   const r = await fetch("/api/anthropic", {
@@ -136,7 +136,7 @@ export default function App() {
     try {
       const result = await generateReport(url);
       setReport(result);
-      document.title = `Money Moves Brief — ${result.businessName}`;
+      document.title = `Money Moves Analysis — ${result.businessName}`;
       const now = new Date();
       const humanTime = now.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true });
       fetch(LOGGER, {
@@ -264,7 +264,7 @@ export default function App() {
 
         {/* SEO hidden h1 */}
         <h1 style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}>
-          Money Moves Brief — Free Revenue Intelligence Tool | Data on Tap
+          Money Moves — Free Revenue Intelligence Tool | Data on Tap
         </h1>
 
         {/* ── HERO BANNER ── */}
@@ -405,7 +405,7 @@ export default function App() {
                 <button className="btn-primary" onClick={handleEmailSubmit}
                   disabled={emailSubmitting || !email.trim() || !firstName.trim()}
                   style={{ marginBottom: 12, width: "100%" }}>
-                  {emailSubmitting ? "Sending..." : "Unlock My Money Moves →"}
+                  {emailSubmitting ? "Sending..." : "Unlock My Bonus Money Moves →"}
                 </button>
                 <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 11, fontWeight: 300, color: "#f0ede8", lineHeight: 1.6 }}>
                   <input type="checkbox" checked={emailSubscribe} onChange={(e) => setEmailSubscribe(e.target.checked)}
@@ -507,7 +507,7 @@ export default function App() {
             {/* Print */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Brief</h3>
             <div className="card dot-anim no-print" style={{ marginTop: 0, border: "1.5px solid #861442" }}>
-              <p className="card-label">Print / Save This Brief</p>
+              <p className="card-label">Print / Save This Inforation</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#c8c4bc", marginBottom: 20 }}>
                 Save or print this page before you click away, or you'll lose your results.
               </p>
@@ -526,7 +526,7 @@ export default function App() {
         {/* ── FOOTER ── */}
         <div className="page-footer-rule" />
         <footer className="page-footer no-print">
-          <div>© 2026 Money Moves Brief &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
+          <div>© 2026 Money Moves &nbsp;◆&nbsp; <a href="https://dataontap.dev" target="_blank" rel="noopener noreferrer">Data on Tap</a> &nbsp;◆&nbsp; <a href="https://monicapoling.com" target="_blank" rel="noopener noreferrer">Monica Poling</a></div>
         </footer>
 
       </div>
