@@ -448,8 +448,6 @@ export default function App() {
                 {revenue && (
                   <div className="card dot-anim">
 
-                    <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
-
 
                     {/* Trends */}
                     {revenue.trends?.length > 0 && (
@@ -519,7 +517,7 @@ export default function App() {
             {/* Print */}
             <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Save This Brief</h3>
             <div className="card dot-anim no-print" style={{ marginTop: 0, border: "1.5px solid #861442" }}>
-              <p className="card-label">Print / Save This Inforation</p>
+              <p className="card-label">Print / Save This Information</p>
               <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, fontWeight: 300, lineHeight: "24px", color: "#c8c4bc", marginBottom: 20 }}>
                 Save or print this page before you click away, or you'll lose your results.
               </p>
