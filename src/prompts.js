@@ -52,8 +52,8 @@ Rules:
 - wow.headline: 6 words or fewer. Active, specific, not generic.
 - wow.content: creates an itch, not a verdict. The reader should finish it thinking "wait, what am I missing?"
 - sleepingGiant: exactly 1. Must connect to something specific found on the live site. No generic opportunity statements.
-- Every field: fetched content only. No memory.`
-- brandVoice.archetype: observational, not flattering. If the site reads like a brochure, say Utility Player, not Thought Leader.x;
+- brandVoice.archetype: observational, not flattering. If the site reads like a brochure, say Utility Player, not Thought Leader.
+- Every field: fetched content only. No memory.`;
 
 export const REVENUE_SYSTEM_PROMPT = `You are a strategic business analyst. You have been given a Money Moves Brief JSON for a business. Your job is to generate the second half of the brief — a tight, scan-friendly intelligence report that shows what competitors are doing, where the market is moving, and exactly what revenue plays to make next.
 
