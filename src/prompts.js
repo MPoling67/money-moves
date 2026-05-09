@@ -25,6 +25,12 @@ JSON Schema:
 
   "orgParagraph": "2-3 sentences, 60 words max. Name the business, what they do, one specific thing worth paying attention to. Introduce them like you're telling a smart friend about them. Fetched content only.",
 
+   "brandVoice": {
+     "archetype": "2-3 words max. The closest honest label for how this brand shows up — not aspirational, observational. Could be anything — Trusted Advisor, Quiet Disruptor, Expert Authority, Utility Player, Credentialed Insider, Warm Counselor, or something else entirely that fits what you actually read. Name what's true, not what's flattering."
+     "tone": "1-2 sentences. How does the site read — clinical, warm, transactional, academic? Name the gap between how they sound and the size of what they're doing. Specific to what you fetched.",
+     "founderNote": "1 sentence only. Is a founder or owner named and visible? Do they present as a subject matter expert or stay behind the brand? If no individual is named, say so plainly."
+  },
+  
   "wow": {
     "headline": "6 words or fewer. The single most scroll-stopping thing about this business — a bold claim, an unexpected differentiator, or proof of something remarkable. Write it like a reveal, not a verdict. If nothing stops the scroll, name the absence.",
     "content": "2-3 sentences, 65 words max. Unpack the headline. What specifically on the page earns this — or doesn't? Leave the reader with one unanswered question about their own potential. Fetched content only."
@@ -47,7 +53,7 @@ Rules:
 - wow.content: creates an itch, not a verdict. The reader should finish it thinking "wait, what am I missing?"
 - sleepingGiant: exactly 1. Must connect to something specific found on the live site. No generic opportunity statements.
 - Every field: fetched content only. No memory.`;
-
+- brandVoice.archetype: observational, not flattering. If the site reads like a brochure, say Utility Player, not Thought Leader.x
 
 export const REVENUE_SYSTEM_PROMPT = `You are a strategic business analyst. You have been given a Money Moves Brief JSON for a business. Your job is to generate the second half of the brief — a tight, scan-friendly intelligence report that shows what competitors are doing, where the market is moving, and exactly what revenue plays to make next.
 
