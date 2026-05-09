@@ -240,20 +240,15 @@ export default function App() {
         .page-footer a { color: #861442; text-decoration: none; font-weight: 500; }
         .page-footer a:hover { color: #be3650; }
 
-        @media print {
+       @media print {
           .no-print { display: none !important; }
           body { background: #fff !important; color: #000 !important; }
           * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           h3 { margin: 0.75rem 0 0.35rem !important; font-size: 18px !important; color: #000 !important; }
           .card { background: #f7f7f7 !important; border: 1px solid #ddd !important; padding: 10px 14px !important; margin-bottom: 6px !important; }
+          .card * { color: #111 !important; }           /* ← ADD THIS */
           .card-label { margin-bottom: 8px !important; color: #861442 !important; }
-          .card-body { color: #111 !important; line-height: 1.5 !important; }
-          .dot-report-head { padding: 12px 0 10px !important; border-bottom: 1px solid #ddd !important; }
-          .dot-report-name { font-size: 22px !important; color: #000 !important; }
-          .dot-report-date { color: #861442 !important; }
-          .dot-report-zone { padding-bottom: 20px !important; background: #fff !important; }
-          .dot-dim-bar { background: #f0f0f0 !important; border-bottom: 1px solid #ddd !important; }
-          .dot-dim-col { color: #000 !important; }
+          /* ...rest stays the same */
         }
         @media (max-width: 600px) {
           .dot-input-row { flex-direction: column; }
