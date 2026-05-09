@@ -354,7 +354,23 @@ export default function App() {
               )}
 
             </div>
-
+            {/* ── BRAND VOICE ── */}
+            {report.brandVoice && (
+              <>
+                <h3 style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: 24, fontWeight: 300, color: "#f0ede8", margin: "2rem 0 0.75rem", letterSpacing: "-0.01em" }}>Brand Voice</h3>
+                <div className="card dot-anim" style={{ animationDelay: "0.15s" }}>
+                  <p className="card-label">{report.brandVoice.archetype}</p>
+                  <p className="card-body" style={{ marginBottom: 16 }}>{report.brandVoice.tone}</p>
+                  {report.brandVoice.founderNote && (
+                    <>
+                      <div style={{ height: 1, background: "rgba(255,255,255,0.07)", margin: "16px 0" }} />
+                      <p className="card-body">{report.brandVoice.founderNote}</p>
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+            
             {/* ── SLEEPING GIANT ── */}
             {report.sleepingGiant && (
               <>
