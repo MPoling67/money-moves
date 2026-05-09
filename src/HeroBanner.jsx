@@ -2,7 +2,7 @@ export default function HeroBanner({
   titleStrong = "Money Moves",
   titleEm = "Analysis",
   subHeadline = "Are you leaving money on the table?",
-  subBody = "Get your free Money Moves analysis — an AI-geenerated analyis that includes your wow factor, your services, and the revenue opportunity hiding in plain sight.",
+  subBody = "Get your free Money Moves analysis — an AI-generated analyis that includes your wow factor, your services, and the revenue opportunity hiding in plain sight.",
   dimLabels = ["About", "Wow Factor", "Services", "Sleeping Giant", "Revenue Moves"],
   heroImage = "/money-moves-hero.png",
   faviconSrc = "/favicon.png",
