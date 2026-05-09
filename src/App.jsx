@@ -245,7 +245,7 @@ export default function App() {
           body { background: #fff !important; color: #000 !important; }
           * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           h3 { margin: 0.75rem 0 0.35rem !important; font-size: 18px !important; color: #000 !important; }
-          .card { background: #f7f7f7 !important; border: 1px solid #ddd !important; padding: 10px 14px !important; margin-bottom: 6px !important; }
+          .card { background: #fff !important; border: 1px solid #ddd !important; padding: 10px 14px !important; margin-bottom: 6px !important; }
           .card * { color: #111 !important; }           /* ← ADD THIS */
           .card-label { margin-bottom: 8px !important; color: #861442 !important; }
           /* ...rest stays the same */
